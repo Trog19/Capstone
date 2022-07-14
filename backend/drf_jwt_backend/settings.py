@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
     'cars.apps.CarsConfig'  # This app is for example use only
+    'employee.apps.'
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,6 @@ try:
     from drf_jwt_backend.local_settings import *
 except ImportError:
     pass
+
+
+
