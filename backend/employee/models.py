@@ -1,7 +1,8 @@
 from django.db import models
+from authentication.models import User
 
 # Create your models here.
 
 
-class Employee(models.Models):
-    user=models.ForeignKey( on_delete=models.CASCADE)
+class Employee(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
