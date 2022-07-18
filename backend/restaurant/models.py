@@ -10,7 +10,7 @@ class Restaurant(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
-    menu = Menu
-    table = Table
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    table = models.ForeignKey(Table, on_delete=models.CASCADE)
 
 
