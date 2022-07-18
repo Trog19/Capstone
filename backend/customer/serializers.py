@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Customer
-# Create your tests here.
 
 
 class CustomerSerializer(serializers.ModelSerializer):

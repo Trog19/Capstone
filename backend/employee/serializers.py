@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Car
+from .models import Employee
 
 # <<<<<<<<<<<<<<<<< EXAMPLE FOR STARTER CODE USE <<<<<<<<<<<<<<<<<
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Car
-        fields = ['id', 'make', 'model', 'year', 'user_id']
+        model = Employee
+        fields = ['id', 'first_name', 'last_name', 'user_id']
         depth = 1

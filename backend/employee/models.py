@@ -10,5 +10,4 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=30)
 
 
-class Customer(models.Model):
-    pass
+
