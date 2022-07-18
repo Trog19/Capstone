@@ -7,5 +7,5 @@ from .models import Employee
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['id', 'first_name', 'last_name', 'user_id']
+        fields = ['id', 'first_name', 'last_name', 'email']
         depth = 1

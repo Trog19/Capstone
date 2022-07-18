@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
     'cars.apps.CarsConfig',  # This app is for example use only
-    'employee.apps.EmployeeConfig'
+    'employee.apps.EmployeeConfig',
+    'customer.apps.CustomerConfig',
+    'restaurant.apps.RestaurantConfig',
+    'menu.apps.MenuConfig',
+    'tables.apps.TablesConfig'
 ]
 
 MIDDLEWARE = [

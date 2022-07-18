@@ -9,7 +9,7 @@ from .serializers import CustomerSerializer
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def user_customer(request):
+def get_customer(request):
     print(
         'User ', f"{request.user.id} {request.user.email} {request.user.username}")
     if request.method == 'POST':
