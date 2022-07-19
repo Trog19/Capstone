@@ -6,5 +6,5 @@ from models import Menu
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
-        fields = ['drink', 'description', 'price']
+        fields = ['restaurant', 'drink', 'description', 'price']
         depth = 1
