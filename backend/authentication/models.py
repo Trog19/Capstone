@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     pass
+
+# is user employee true flase boolean field
     '''
     This is a custom version of the built in User class
     It contains all of the built in fields and functionality of the standard User

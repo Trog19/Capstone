@@ -9,9 +9,9 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
-def make_restaurant(request):
+def get_all_menus(request):
     if request.method == 'POST':
         serializer = MenuSerializer(data=request.data)
         if serializer.is_valid():
@@ -19,18 +19,18 @@ def make_restaurant(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        menu = Menu.objects.filter(user_id=request.user.id)
+        menu = Menu.objects.all()
         serializer = MenuSerializer(menu, many=True)
         return Response(serializer.data)
 
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def menu_detail(request, pk):
+@api_view(['GET','PUT', 'DELETE'])
+@permission_classes([IsAuthenticated])
+def user_menu (request, pk):
     menu =get_object_or_404(Menu, pk=pk)
     if request.method == 'GET':
         serializer = MenuSerializer(menu)
-        return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = MenuSerializer(menu, data=request.data) 
         serializer.is_valid(raise_exception=True)
@@ -39,3 +39,13 @@ def menu_detail(request, pk):
     elif request.method == 'DELETE':
         menu.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def user_post (request):
+    if request.method == 'POST' :
+        serializers = MenuSerializer(data=request.data)
+        if serializers.is_valid():
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
