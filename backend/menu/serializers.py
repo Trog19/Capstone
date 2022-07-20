@@ -5,8 +5,10 @@ from .models import Menu
 
 
 class MenuSerializer(serializers.ModelSerializer):
+    restaurant_id = serializers.IntegerField()
     class Meta:
-        restaurant = serializers.IntegerField(write_only=True)
+        
         model = Menu
-        fields = ['id', 'restaurant', 'drink', 'description', 'price']
+        fields = ['id', 'restaurant_id', 'drink', 'description', 'price']
         depth = 1
+    
