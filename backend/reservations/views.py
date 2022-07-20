@@ -7,16 +7,10 @@ from .serializers import ReservationSerializer
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_reservations(request):
-    if request.method == 'POST':
-        serializer = ReservationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
+    if request.method == 'GET':
         reservation = Reservation.objects.filter(user_id=request.user.id)
         serializer = ReservationSerializer(reservation, many=True)
         return Response(serializer.data)
@@ -25,7 +19,7 @@ def get_all_reservations(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
-def user_reservation (request, pk):
+def edit_reservation (request, pk):
     reservation =get_object_or_404(Reservation, pk=pk)
     if request.method == 'GET':
         serializer = ReservationSerializer(reservation)
@@ -38,3 +32,13 @@ def user_reservation (request, pk):
     elif request.method == 'DELETE':
         Reservation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def make_reservation(request):
+    if request.method == 'POST':
+        serializer = ReservationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
