@@ -16,30 +16,22 @@ def get_restaurant(request):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def make_restaurant(request):
-    print(
-        'User ', f"{request.employee.id} {request.employee.email} ")
     if request.method == 'POST':
         serializer = RestaurantSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
-        restaurant = Restaurant.objects.filter(user_id=request.user.id)
-        serializer = RestaurantSerializer(restaurant, many=True)
-        return Response(serializer.data)
 
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
-def car_detail(request, pk):
+def restaurant_detail(request, pk):
     restaurant =get_object_or_404(Restaurant, pk=pk)
-    print(
-    'User ', f"{request.employee.id} {request.employee.email} ")
     if request.method == 'GET':
         serializer = RestaurantSerializer(restaurant)
         return Response(serializer.data)

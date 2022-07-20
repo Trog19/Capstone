@@ -12,16 +12,11 @@ from django.shortcuts import get_object_or_404
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_menus(request):
-    if request.method == 'POST':
-        serializer = MenuSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
+    if request.method == 'GET':
         menu = Menu.objects.all()
         serializer = MenuSerializer(menu, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
