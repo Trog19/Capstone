@@ -11,9 +11,11 @@ from django.shortcuts import get_object_or_404
 @permission_classes([AllowAny])
 def get_all_reservations(request):
     if request.method == 'GET':
-        reservation = Reservation.objects.filter(user_id=request.user.id)
+        reservation = Reservation.objects.all
         serializer = ReservationSerializer(reservation, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 

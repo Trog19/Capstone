@@ -8,5 +8,5 @@ from restaurant.models import Restaurant
 class Table(models.Model):
     Restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, null=True, blank=True)
     Number = models.IntegerField()
-    seats = models.IntegerField()
+    Seats = models.IntegerField()
 

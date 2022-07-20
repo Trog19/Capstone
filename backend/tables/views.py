@@ -11,13 +11,7 @@ from django.shortcuts import get_object_or_404
 @api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def get_all_tables(request):
-    if request.method == 'POST':
-        serializer = TableSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
+    if request.method == 'GET':
         table = Table.objects.filter(user_id=request.user.id)
         serializer = TableSerializer(table, many=True)
         return Response(serializer.data)
@@ -40,3 +34,13 @@ def user_table (request, pk):
         Table.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_table (request):
+ if request.method == 'POST':
+        serializer = TableSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -3,6 +3,6 @@ from django.urls import URLPattern, path, include
 from tables import views
 
 urlpatterns = [
-    path('', views.get_all_tables),
+    path('all/', views.get_all_tables),
     path('', views.user_table)
 ]
