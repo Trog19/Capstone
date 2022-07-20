@@ -4,5 +4,6 @@ from tables import views
 
 urlpatterns = [
     path('all/', views.get_all_tables),
-    path('', views.user_table)
+    path('<int:pk>', views.user_tables),
+    path('', views.add_table)
 ]

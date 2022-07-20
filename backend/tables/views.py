@@ -21,7 +21,7 @@ def get_all_tables(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated])
-def user_table (request, pk):
+def user_tables (request, pk):
     table =get_object_or_404(Table, pk=pk)
     if request.method == 'GET':
         serializer = TableSerializer(table)
@@ -32,7 +32,7 @@ def user_table (request, pk):
         serializer.save()
         return Response(serializer.data)
     elif request.method == 'DELETE':
-        Table.delete()
+        table.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
