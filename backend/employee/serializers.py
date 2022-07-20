@@ -5,7 +5,8 @@ from .models import Employee
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
+    restaurant_id = serializers.IntegerField()
     class Meta:
         model = Employee
-        fields = ['id', 'first_name', 'last_name', 'email']
+        fields = ['id', 'restaurant_id', 'first_name', 'last_name', 'email']
         depth = 1

@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 @permission_classes([AllowAny])
 def get_all_reservations(request):
     if request.method == 'GET':
-        reservation = Reservation.objects.all
+        reservation = Reservation.objects.all()
         serializer = ReservationSerializer(reservation, many=True)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -32,7 +32,7 @@ def edit_reservation (request, pk):
         serializer.save()
         return Response(serializer.data)
     elif request.method == 'DELETE':
-        Reservation.delete()
+        reservation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
@@ -41,6 +41,6 @@ def make_reservation(request):
     if request.method == 'POST':
         serializer = ReservationSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -5,7 +5,8 @@ from rest_framework import serializers
 
 
 class TableSerializer(serializers.ModelSerializer):
+    restaurant_id = serializers.IntegerField()
     class Meta:
         model = Table
-        fields = ['table', 'id', 'number', 'seats']
+        fields = ['restaurant_id', 'id', 'number', 'seats']
         depth = 1

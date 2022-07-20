@@ -3,7 +3,8 @@ from .models import Order
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    restaurant_id = serializers.IntegerField()
     class Meta:
         model = Order
-        fields = ['user', 'table', 'reservation', 'order']
+        fields = ['user', 'restaurant_id', 'table', 'reservation', 'order']
         depth = 1

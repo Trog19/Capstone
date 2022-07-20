@@ -8,13 +8,14 @@ from .serializers import TableSerializer
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_tables(request):
     if request.method == 'GET':
-        table = Table.objects.filter(user_id=request.user.id)
+        table = Table.objects.all()
         serializer = TableSerializer(table, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
