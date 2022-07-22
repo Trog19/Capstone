@@ -8,9 +8,13 @@ console.log ("Hello world")
 const EmployeePage = (props) => {
     const [user, token] = useAuth();
 
-    
+
         const[name, setName] = useState("")
         const[location, setLocation] = useState("")
+        const[drink, setDrink] = useState("")
+        const[price, setPrice] = useState("")
+        const[description, setDescription] = useState("")
+        const[restaurant_id, setRestaurant_id] = useState("")
 
         function handleSubmit(event){
             event.preventDefault();
@@ -23,8 +27,22 @@ const EmployeePage = (props) => {
             return(newRestaurant)
             
         }
+
+        function otherSubmit(event){
+            event.preventDefault();
+            let newDrink ={
+                drink: drink,
+                price: price,
+                description: description,
+                restaurant_id: restaurant_id
+            };
+        console.log(newDrink)
+        props.PostDrink(newDrink)
+        return(newDrink)
+        }
         return (
-            <form className = "form" onSubmit={handleSubmit}>
+            <div>
+  <form className = "form" onSubmit={handleSubmit}>
                 <div>
                     <label>Name</label>
                     <input type='text' value={name} onChange={(event) => setName(event.target.value)}/>
@@ -33,6 +51,21 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>
+            <form className= "form" onSubmit={otherSubmit}>
+                <div>
+                    <label>Drink</label>
+                    <input type='text' value={drink} onChange={(event)=> setDrink(event.target.value)}/>
+                    <label>Price</label>
+                    <input type= 'int' value={price} onChange={(event)=> setPrice(event.target.value)}/>
+                    <label>Description</label>
+                    <input type='text' value={description} onChange={(event)=> setDescription(event.target.value)}/>
+                    <label>Restaurant</label>
+                    <input type = 'int' value={restaurant_id} onChange={(event) => setRestaurant_id(event.target.value)}/>
+                    <button type="submit">Add Drink</button>
+                </div>
+            </form>
+                    </div>
+          
             
         );
 

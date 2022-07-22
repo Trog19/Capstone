@@ -25,6 +25,8 @@ function App() {
   const [menu, setMenu] = useState([]);
   const [order, setOrder] = useState([]);
   const [reservation, setReservation] = useState([]);
+  const [user, token] = useAuth();
+  const [drink, setDrink] = useAuth();
 
 
   async function GetAllRestaurants(){
@@ -43,22 +45,35 @@ function App() {
     console.log("Restaurant Search", results.data)
   }
 
-  useEffect(()=> {
-    try{
-    let response = await axios.post('http://127.0.0.1:8000/api/restaurant/', { 
-    headers: {
-      Authorization: "Bearer " + token,
+  const PostRestaurant = async (data) => {
+    console.log(data)
+    try {
+      let response = await axios.post("http://127.0.0.1:8000/api/restaurant/", data, {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
     }
-    });
-  setRestaurant(response.data);
-} catch (error) {
-  console.log(error.response.data);
-  }
-  postRestaurant();
-}, [token]);
-    if(response.status===201){
-      GetAllRestaurants()
     
+  }
+
+  const PostDrink = async (data) => {
+    console.log(data)
+    try {
+      let response = await axios.post("http://127.0.0.1:8000/api/menu/", data, {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
 
 
 
@@ -67,7 +82,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <EmployeePage PostRestaurant={PostRestaurant}/>
+      <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink}/>
       <Routes>
         <Route
           path="/"
@@ -84,5 +99,5 @@ function App() {
     </div>
   );
 }
-}
+
 export default App;
