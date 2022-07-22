@@ -10,7 +10,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import {postRestaurant} from "./pages/EmployeePage/EmployeePage";
 import Res from "./components/Restaurants/GetAllRestaurants";
 import EmployeePage from "./pages/EmployeePage/EmployeePage";
-
+import useAuth from "./hooks/useAuth";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -43,12 +43,23 @@ function App() {
     console.log("Restaurant Search", results.data)
   }
 
-  async function PostRestaurant(newRestaurant){
-    let response = await axios.post('http://127.0.0.1:8000/api/restaurant/', newRestaurant); 
+  useEffect(()=> {
+    try{
+    let response = await axios.post('http://127.0.0.1:8000/api/restaurant/', { 
+    headers: {
+      Authorization: "Bearer " + token,
+    }
+    });
+  setRestaurant(response.data);
+} catch (error) {
+  console.log(error.response.data);
+  }
+  postRestaurant();
+}, [token]);
     if(response.status===201){
       GetAllRestaurants()
-    }
-  }
+    
+
 
 
 
@@ -73,5 +84,5 @@ function App() {
     </div>
   );
 }
-
+}
 export default App;
