@@ -1,15 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import Restaurants from "../../components/Restaurants/GetAllRestaurants";
 
-import axios from "axios";
 
 console.log ("Hello world")
-const EmployeePage = () => {
-const [user, token] = useAuth();
+const EmployeePage = (props) => {
+    const [user, token] = useAuth();
 
-
-    const CreateRestaurant = (props) =>{
+    
         const[name, setName] = useState("")
         const[location, setLocation] = useState("")
 
@@ -20,12 +19,14 @@ const [user, token] = useAuth();
                 location: location
             };
             console.log(newRestaurant)
-            props.postRestaurant(newRestaurant)
+            props.PostRestaurant(newRestaurant)
+            return(newRestaurant)
+            
         }
         return (
-            <form onSubmit={handleSubmit}>
+            <form className = "form" onSubmit={handleSubmit}>
                 <div>
-                    <lable>Name</lable>
+                    <label>Name</label>
                     <input type='text' value={name} onChange={(event) => setName(event.target.value)}/>
                     <label>Location</label>
                     <input type='text' value={location} onChange={(event) => setLocation(event.target.value)}/>
@@ -34,7 +35,6 @@ const [user, token] = useAuth();
             </form>
             
         );
-    }
 
 }
 
