@@ -8,7 +8,7 @@ console.log ("Hello world")
 const EmployeePage = (props) => {
     const [user, token] = useAuth();
 
-
+    
         const[name, setName] = useState("")
         const[location, setLocation] = useState("")
         const[drink, setDrink] = useState("")
@@ -59,7 +59,7 @@ const EmployeePage = (props) => {
                     <input type= 'int' value={price} onChange={(event)=> setPrice(event.target.value)}/>
                     <label>Description</label>
                     <input type='text' value={description} onChange={(event)=> setDescription(event.target.value)}/>
-                    <label>Restaurant</label>
+                    <label>Restaurant ID</label>
                     <input type = 'int' value={restaurant_id} onChange={(event) => setRestaurant_id(event.target.value)}/>
                     <button type="submit">Add Drink</button>
                 </div>

@@ -19,6 +19,7 @@ import Footer from "./components/Footer/Footer";
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import { useState, useEffect } from "react";
+import CustomerPage from "./pages/CustomerPage/CustomerPage";
 
 function App() {
   const [restaurant, setRestaurant] = useState([]);
@@ -27,7 +28,7 @@ function App() {
   const [reservation, setReservation] = useState([]);
   const [user, token] = useAuth();
   const [drink, setDrink] = useAuth();
-
+  
 
   async function GetAllRestaurants(){
     let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
@@ -75,6 +76,21 @@ function App() {
     
   }
 
+  const PostReservation = async (data) => {
+    console.log(data)
+    try {
+      let response = await axios.post("http://127.0.0.1:8000/api/reservations/", data, {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+
 
 
 
@@ -83,6 +99,7 @@ function App() {
     <div>
       <Navbar />
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink}/>
+      <CustomerPage PostReservation={PostReservation}/>
       <Routes>
         <Route
           path="/"

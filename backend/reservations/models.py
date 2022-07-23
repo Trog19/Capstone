@@ -5,6 +5,6 @@ from restaurant.models import Restaurant
 
 class Reservation(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True,default=None )
-    time = models.DateTimeField(null=True)
+    time = models.IntegerField(blank=True, null=True, default=None)
     party_size = models.IntegerField()
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, blank=True, null=True,default=None )

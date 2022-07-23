@@ -8,5 +8,5 @@ class TableSerializer(serializers.ModelSerializer):
     restaurant_id = serializers.IntegerField()
     class Meta:
         model = Table
-        fields = ['restaurant_id', 'id', 'number', 'seats']
+        fields = ['restaurant_id', 'id', 'number', 'seats', 'occupied']
         depth = 1

@@ -11,4 +11,5 @@ class Table(models.Model):
     number = models.IntegerField(null=True)
     seats = models.IntegerField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    occupied = models.BooleanField(default=False)
 
