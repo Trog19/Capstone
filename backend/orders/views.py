@@ -7,16 +7,10 @@ from .serializers import OrderSerializer
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 @permission_classes([AllowAny])
 def get_all_orders(request):
-    if request.method == 'POST':
-        serializer = OrderSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
+    if request.method == 'GET':
         order = Order.objects.filter(user_id=request.user.id)
         serializer = OrderSerializer(order, many=True)
         return Response(serializer.data)
@@ -38,3 +32,16 @@ def user_Order (request, pk):
     elif request.method == 'DELETE':
         Order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
+(['POST'])
+@permission_classes([AllowAny])
+def post_order(request):
+    if request.method == 'POST':
+        serializer = OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

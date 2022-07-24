@@ -6,5 +6,5 @@ class OrderSerializer(serializers.ModelSerializer):
     restaurant_id = serializers.IntegerField()
     class Meta:
         model = Order
-        fields = ['user', 'restaurant_id', 'table', 'reservation', 'order']
+        fields = ['user', 'restaurant_id', 'table', 'reservation', 'drinks']
         depth = 1
