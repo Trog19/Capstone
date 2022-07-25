@@ -8,31 +8,35 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import {postRestaurant} from "./pages/EmployeePage/EmployeePage";
-import Res from "./components/Restaurants/GetAllRestaurants";
+import Res from "./components/Restaurants/DisplayRestaurants";
 import EmployeePage from "./pages/EmployeePage/EmployeePage";
 import useAuth from "./hooks/useAuth";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import DisplayRestaurants from "./components/Restaurants/DisplayRestaurants";
+
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import { useState, useEffect } from "react";
 import CustomerPage from "./pages/CustomerPage/CustomerPage";
 
+
 function App() {
-  const [restaurant, setRestaurant] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
   const [menu, setMenu] = useState([]);
   const [order, setOrder] = useState([]);
   const [reservation, setReservation] = useState([]);
   const [user, token] = useAuth();
   const [drink, setDrink] = useAuth();
+  const [restaurant, setRestaurant] = useState([]);
   
 
-  async function GetAllRestaurants(){
+  async function AllRestaurants(){
     let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
-    setRestaurant(response.data);
+    setRestaurants(response.data);
     console.log("Restaurant Data", response.data)
   }
 
@@ -105,11 +109,14 @@ const PostOrder = async (data) => {
   }
 }
 
-
+  useEffect(()=>{
+    AllRestaurants()
+  },[])
 
   return (
     <div>
       <Navbar />
+      <DisplayRestaurants restaurants ={restaurants}/>
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink}/>
       <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder}/>
       <Routes>
@@ -117,7 +124,7 @@ const PostOrder = async (data) => {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage />
+              <HomePage/>
             </PrivateRoute>
           }
         />

@@ -1,6 +1,7 @@
 from django.db import models
 from authentication.models import User
 from restaurant.models import Restaurant
+from tables.models import Table
 # Create your models here.
 
 class Reservation(models.Model):
@@ -8,3 +9,5 @@ class Reservation(models.Model):
     time = models.IntegerField(blank=True, null=True, default=None)
     party_size = models.IntegerField()
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, blank=True, null=True,default=None )
+    table = models.IntegerField(blank=True, null=True,default=None )
+    check_in = models.BooleanField(default=False)

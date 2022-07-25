@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import Restaurants from "../../components/Restaurants/GetAllRestaurants";
+import Restaurants from "../../components/Restaurants/DisplayRestaurants";
 import axios from "axios";
+
 
 
 console.log("Hello World")
@@ -46,6 +47,7 @@ const CustomerPage = (props) => {
 }
     return(
         <div>
+            <div></div>
             <form className="form" onSubmit={handleSubmit}>
                 <div>
                     <label>UserName</label>

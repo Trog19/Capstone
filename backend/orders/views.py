@@ -36,7 +36,7 @@ def user_Order (request, pk):
 
 
 
-(['POST'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 def post_order(request):
     if request.method == 'POST':
