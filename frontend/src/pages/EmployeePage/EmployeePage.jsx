@@ -8,7 +8,8 @@ console.log ("Hello world")
 const EmployeePage = (props) => {
     const [user, token] = useAuth();
 
-    
+        const[accepted, setAccepted] = useState("")
+        const[table_id, setTable_id] = useState("")
         const[name, setName] = useState("")
         const[location, setLocation] = useState("")
         const[drink, setDrink] = useState("")
@@ -69,6 +70,23 @@ const EmployeePage = (props) => {
             
         );
 
+
+        function additionalSubmit(event){
+            event.preventDefault();
+            let reservationStatus ={
+                table: table_id,
+                accept: accepted
+            };
+            console.log(reservationStatus)
+            props.EditReservation(reservationStatus)
+            return(reservationStatus)
+            }
+        return (
+            <div>
+        <form className="Form" onSubmit={additionalSubmit}>
+        </form>        
+            </div>
+        )
 }
 
 

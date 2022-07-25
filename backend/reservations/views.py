@@ -19,7 +19,7 @@ def get_all_reservations(request):
 
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def edit_reservation (request, pk):
     reservation =get_object_or_404(Reservation, pk=pk)
@@ -34,6 +34,11 @@ def edit_reservation (request, pk):
     elif request.method == 'DELETE':
         reservation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    elif request.method == 'PATCH':
+        serializer = ReservationSerializer(reservation, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

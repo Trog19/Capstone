@@ -27,7 +27,6 @@ import CustomerPage from "./pages/CustomerPage/CustomerPage";
 function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [menu, setMenu] = useState([]);
-  const [order, setOrder] = useState([]);
   const [reservation, setReservation] = useState([]);
   const [user, token] = useAuth();
   const [drink, setDrink] = useAuth();
@@ -93,6 +92,20 @@ function App() {
       console.log(error)
     }
     
+  }
+
+  const EditReservation = async (date) => {
+    console.log(data)
+    try {
+      let response = await axios.put("http://127.0.0.1:8000/api/reservations/5", data, {
+        headers: {
+          Authorization: "Bearer" + token
+        }
+      })
+      console.log(response.data)
+    } catch (error) {
+    console.log(data)  
+    }
   }
 
 const PostOrder = async (data) => {

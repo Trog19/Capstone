@@ -16,7 +16,7 @@ const CustomerPage = (props) => {
     const[table_id, setTable_id] = useState("")
     const[drinks, setDrinks]=useState("")
     const[reservation_id, setReservation_id] = useState("")
-
+    const[check_in, setCheck_in] = useState("")
 
 
 
@@ -45,6 +45,14 @@ const CustomerPage = (props) => {
     props.PostOrder(newOrder)
     return(newOrder)
 }
+
+function additionalSubmit(event){
+    event.preventDefault();
+    let CheckIn={
+        
+    }
+}
+
     return(
         <div>
             <div></div>
@@ -76,6 +84,8 @@ const CustomerPage = (props) => {
 
             </form>
         </div>
+
+
     )
 
 }
