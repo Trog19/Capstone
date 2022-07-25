@@ -91,7 +91,19 @@ function App() {
     
   }
 
-
+const PostOrder = async (data) => {
+  console.log(data)
+  try {
+    let response = await axios.post("http://127.0.0.1:8000/api/order/", data, {
+      headers: {
+        Authorization: "Bearer" + token
+  } 
+    })
+    console.log(response.data)
+  }catch (error) {
+    console.log(error)
+  }
+}
 
 
 
@@ -99,7 +111,7 @@ function App() {
     <div>
       <Navbar />
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink}/>
-      <CustomerPage PostReservation={PostReservation}/>
+      <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder}/>
       <Routes>
         <Route
           path="/"

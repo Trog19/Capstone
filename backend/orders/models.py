@@ -13,5 +13,5 @@ class Order(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True,default=None)
     table = models.ForeignKey(Table, on_delete=models.CASCADE, blank=True, null=True,default=None)
     reservation = models.ForeignKey(Reservation, on_delete= models.CASCADE, blank=True, null=True,default=None)
-    drinks = models.ForeignKey(Menu, on_delete= models.CASCADE, blank=True, null=True,default=None)
+    drinks = models.CharField(max_length=150)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, blank=True, null=True,default=None )

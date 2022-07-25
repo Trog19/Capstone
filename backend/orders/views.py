@@ -11,10 +11,10 @@ from django.shortcuts import get_object_or_404
 @permission_classes([AllowAny])
 def get_all_orders(request):
     if request.method == 'GET':
-        order = Order.objects.filter(user_id=request.user.id)
+        order = Order.objects.all()
         serializer = OrderSerializer(order, many=True)
-        return Response(serializer.data)
-
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -30,7 +30,7 @@ def user_Order (request, pk):
         serializer.save()
         return Response(serializer.data)
     elif request.method == 'DELETE':
-        Order.delete()
+        order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -41,7 +41,7 @@ def user_Order (request, pk):
 def post_order(request):
     if request.method == 'POST':
         serializer = OrderSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
