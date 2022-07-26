@@ -12,3 +12,4 @@ class Reservation(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE, blank=True, null=True, default=None )
     check_in = models.BooleanField(default=False)
     accepted = models.BooleanField(default=False)
+    last_name= models.CharField(max_length=50)

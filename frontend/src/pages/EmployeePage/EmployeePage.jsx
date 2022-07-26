@@ -12,6 +12,7 @@ const EmployeePage = (props) => {
         const[table_id, setTable_id] = useState("")
         const[name, setName] = useState("")
         const[location, setLocation] = useState("")
+        const[cuisine, setCuisine] = useState("")
         const[drink, setDrink] = useState("")
         const[price, setPrice] = useState("")
         const[description, setDescription] = useState("")
@@ -24,7 +25,8 @@ const EmployeePage = (props) => {
             event.preventDefault();
             let newRestaurant = {
                 name: name,
-                location: location
+                location: location,
+                cusisine: cuisine
             };
             console.log(newRestaurant)
             props.PostRestaurant(newRestaurant)
@@ -65,6 +67,8 @@ const EmployeePage = (props) => {
                     <input type='text' value={name} onChange={(event) => setName(event.target.value)}/>
                     <label>Location</label>
                     <input type='text' value={location} onChange={(event) => setLocation(event.target.value)}/>
+                    <label>Cuisine</label>
+                    <input type='text' value={cuisine} onChange={(event) => setCuisine(event.target.value)}/>
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>

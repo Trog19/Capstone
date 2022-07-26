@@ -7,10 +7,11 @@ import axios from "axios";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import {postRestaurant} from "./pages/EmployeePage/EmployeePage";
-import {reservation_id} from "./pages/EmployeePage/EmployeePage";
 import useAuth from "./hooks/useAuth";
 import EmployeePage from "./pages/EmployeePage/EmployeePage";
+import DisplayReservations from "./components/DisplayReservations/DisplayReservations";
+import SearchBar from "./components/SearchBar/SearchBar";
+
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -26,7 +27,6 @@ import DisplayMenu from "./components/DisplayMenu/DisplayMenu";
 
 
 function App() {
-  const [restaurants, setRestaurants] = useState([]);
   const [menu, setMenu] = useState([]);
   const [reservation, setReservation] = useState([]);
   const [user, token] = useAuth();
@@ -34,21 +34,8 @@ function App() {
   const [restaurant, setRestaurant] = useState([]);
   const [reservations, setReservations] = useState ([]);
 
-  async function AllRestaurants(){
-    let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
-    setRestaurants(response.data);
-    console.log("Restaurant Data", response.data)
-  }
 
-  const RestaurantSearch = (searchTerm)=>{
-    let results = restaurant.filter((restaurant) => {
-      if(restaurant.name.includes(searchTerm) || restaurant.location.includes(searchTerm)){
-        return true;
-      }
-    }
-    );setRestaurant(results)
-    console.log("Restaurant Search", results.data)
-  }
+
 
   const PostRestaurant = async (data) => {
     console.log(data)
@@ -65,11 +52,7 @@ function App() {
     
   }
 
-  async function AllMenus(){
-    let response = await axios.get("http://127.0.0.1:8000/api/menu/all/");
-    setMenu(response.data);
-    console.log("Menu Data", response.data)
-  }
+
 
   const PostDrink = async (data) => {
     console.log(data)
@@ -116,12 +99,6 @@ function App() {
     }
   }
 
-  async function DisplayReservations(){
-    let response = await axios.get("http://127.0.0.1:8000/api/reservations/all/");
-    setReservations(response.data);
-    console.log("Reservations", response.data)
-  }
-
 
 const PostOrder = async (data) => {
   console.log(data)
@@ -137,25 +114,16 @@ const PostOrder = async (data) => {
   }
 }
 
-  useEffect(()=>{
-    AllRestaurants()
-  },[])
 
-  useEffect(()=>{
-    AllMenus ()
-  },[])
 
-  useEffect(()=>{
-    DisplayReservations()
-  },[])
-
+ 
 
   return (
     <div>
       <Navbar />
-      <DisplayRestaurants restaurants ={restaurants}/>
+      <DisplayRestaurants/>
       <DisplayMenu menu ={menu}/>      
-      {/* <DisplayReservations reservations ={reservations}/> */}
+      <DisplayReservations reservations ={reservations}/> 
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
       <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder} EditReservation={EditReservation}/>
       <Routes>
