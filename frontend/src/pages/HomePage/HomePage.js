@@ -13,6 +13,9 @@ const HomePage = () => {
   console.log(user)
   console.log(token)
 
+
+
+  
   useEffect(() => {
     const fetchCars = async () => {
       try {
@@ -30,7 +33,7 @@ const HomePage = () => {
   }, [token]);
   return (
     <div className="container">
-      <h1>Home Page for {user.username}!</h1>
+      <h1>Wait-Less!</h1>
       {cars &&
         cars.map((car) => (
           <p key={car.id}>

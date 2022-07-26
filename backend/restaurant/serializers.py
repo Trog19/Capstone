@@ -6,6 +6,6 @@ from .models import Restaurant
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
-        fields = ['id', 'name', 'location']
+        fields = ['id', 'name', 'location', 'cuisine']
         depth = 1
     

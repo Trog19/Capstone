@@ -11,3 +11,4 @@ class MenuSerializer(serializers.ModelSerializer):
         fields = ['id', 'restaurant_name', 'drink', 'description', 'price']
         depth = 1
     
+
