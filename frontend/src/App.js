@@ -22,6 +22,7 @@ import DisplayRestaurants from "./components/Restaurants/DisplayRestaurants";
 import PrivateRoute from "./utils/PrivateRoute";
 import { useState, useEffect } from "react";
 import CustomerPage from "./pages/CustomerPage/CustomerPage";
+import DisplayMenu from "./DisplayMenu/DisplayMenu";
 
 
 function App() {
@@ -64,6 +65,12 @@ function App() {
     
   }
 
+  async function AllMenus(){
+    let response = await axios.get("http://127.0.0.1:8000/api/menu/all/");
+    setMenu(response.data);
+    console.log("Menu Data", response.data)
+  }
+
   const PostDrink = async (data) => {
     console.log(data)
     try {
@@ -97,7 +104,7 @@ function App() {
   const EditReservation = async (data) => {
     console.log(data)
     try {
-      let response = await axios.put("http://127.0.0.1:8000/api/reservations/8", data, {
+      let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
         headers: {
           Authorization: "Bearer " + token
         }
@@ -105,7 +112,7 @@ function App() {
       setReservation(response.data)
       console.log(response.data)
     } catch (error) {
-    console.log(data)  
+    console.log(error)  
     }
   }
 
@@ -127,10 +134,17 @@ const PostOrder = async (data) => {
     AllRestaurants()
   },[])
 
+  useEffect(()=>{
+    AllMenus ()
+  },[])
+
+
+
   return (
     <div>
       <Navbar />
       <DisplayRestaurants restaurants ={restaurants}/>
+      <DisplayMenu menu ={menu}/>      
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
       <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder}/>
       <Routes>
