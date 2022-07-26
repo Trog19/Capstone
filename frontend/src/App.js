@@ -8,9 +8,9 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import {postRestaurant} from "./pages/EmployeePage/EmployeePage";
-import Res from "./components/Restaurants/DisplayRestaurants";
-import EmployeePage from "./pages/EmployeePage/EmployeePage";
+import {reservation_id} from "./pages/EmployeePage/EmployeePage";
 import useAuth from "./hooks/useAuth";
+import EmployeePage from "./pages/EmployeePage/EmployeePage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -94,14 +94,15 @@ function App() {
     
   }
 
-  const EditReservation = async (date) => {
+  const EditReservation = async (data) => {
     console.log(data)
     try {
-      let response = await axios.put("http://127.0.0.1:8000/api/reservations/5", data, {
+      let response = await axios.put("http://127.0.0.1:8000/api/reservations/8", data, {
         headers: {
-          Authorization: "Bearer" + token
+          Authorization: "Bearer " + token
         }
       })
+      setReservation(response.data)
       console.log(response.data)
     } catch (error) {
     console.log(data)  
@@ -130,7 +131,7 @@ const PostOrder = async (data) => {
     <div>
       <Navbar />
       <DisplayRestaurants restaurants ={restaurants}/>
-      <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink}/>
+      <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
       <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder}/>
       <Routes>
         <Route

@@ -16,6 +16,9 @@ const EmployeePage = (props) => {
         const[price, setPrice] = useState("")
         const[description, setDescription] = useState("")
         const[restaurant_id, setRestaurant_id] = useState("")
+        const[reservation_id, setReservation_id] = useState("")
+
+
 
         function handleSubmit(event){
             event.preventDefault();
@@ -41,6 +44,18 @@ const EmployeePage = (props) => {
         props.PostDrink(newDrink)
         return(newDrink)
         }
+
+        function additionalSubmit(event){
+            event.preventDefault();
+            let reservationStatus ={
+                table: table_id,
+                accept: accepted,
+                reservation: reservation_id
+            };
+            console.log(reservationStatus)
+            props.EditReservation(reservationStatus)
+            return(reservationStatus)
+            }
         return (
             <div>
   <form className = "form" onSubmit={handleSubmit}>
@@ -65,28 +80,22 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Drink</button>
                 </div>
             </form>
+            <form className="Form" onSubmit={additionalSubmit}>
+                <div>
+                    <label>Table</label>
+                    <input type='int' value={table_id} onChange={(event) => setTable_id(event.target.value)}/>
+                    <label>Status</label>
+                    <input type='text' value={accepted} onChange={(event) => setAccepted(event.target.value)}/>
+                    <label>Reservation Num.</label>
+                    <input type='int' value={reservation_id} onChange={(event) => setReservation_id(event.target.value)}/>
+                    <button type="submit"> Accept Res.</button>
+                </div>
+
+            </form>
                     </div>
           
             
         );
-
-
-        function additionalSubmit(event){
-            event.preventDefault();
-            let reservationStatus ={
-                table: table_id,
-                accept: accepted
-            };
-            console.log(reservationStatus)
-            props.EditReservation(reservationStatus)
-            return(reservationStatus)
-            }
-        return (
-            <div>
-        <form className="Form" onSubmit={additionalSubmit}>
-        </form>        
-            </div>
-        )
 }
 
 
@@ -118,33 +127,3 @@ export default EmployeePage;
 
 
 
-
-// useEffect(() => {
-//     const fetchRestaurants = async () => {
-//       try {
-//         let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/", {
-//           headers: {
-//             Authorization: "Bearer " + token,
-//           },
-//         });
-//         setRestaurant(response.data);
-//       } catch (error) {
-//         console.log(error.response.data);
-//       }
-//     };
-//     fetchRestaurants();
-//   }, [token]);
-//   return (
-//     <div className="container">
-//       <h1>Employee Page for {user.username}!</h1>
-//       {restaurant &&
-//         restaurant.map((restaurant) => (
-//           <p key={restaurant.id}>
-//             {restaurant.id} {restaurant.name} {restaurant.location}
-//           </p>
-//         ))}
-//     </div>
-//   );
-// };
-
-// export default EmployeePage;
