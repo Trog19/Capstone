@@ -22,7 +22,7 @@ import DisplayRestaurants from "./components/Restaurants/DisplayRestaurants";
 import PrivateRoute from "./utils/PrivateRoute";
 import { useState, useEffect } from "react";
 import CustomerPage from "./pages/CustomerPage/CustomerPage";
-import DisplayMenu from "./DisplayMenu/DisplayMenu";
+import DisplayMenu from "./components/DisplayMenu/DisplayMenu";
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
   const [user, token] = useAuth();
   const [drink, setDrink] = useAuth();
   const [restaurant, setRestaurant] = useState([]);
-  
+  const [reservations, setReservations] = useState ([]);
 
   async function AllRestaurants(){
     let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
@@ -116,6 +116,13 @@ function App() {
     }
   }
 
+  async function DisplayReservations(){
+    let response = await axios.get("http://127.0.0.1:8000/api/reservations/all/");
+    setReservations(response.data);
+    console.log("Reservations", response.data)
+  }
+
+
 const PostOrder = async (data) => {
   console.log(data)
   try {
@@ -138,6 +145,9 @@ const PostOrder = async (data) => {
     AllMenus ()
   },[])
 
+  useEffect(()=>{
+    DisplayReservations()
+  },[])
 
 
   return (
@@ -145,8 +155,9 @@ const PostOrder = async (data) => {
       <Navbar />
       <DisplayRestaurants restaurants ={restaurants}/>
       <DisplayMenu menu ={menu}/>      
+      {/* <DisplayReservations reservations ={reservations}/> */}
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
-      <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder}/>
+      <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder} EditReservation={EditReservation}/>
       <Routes>
         <Route
           path="/"

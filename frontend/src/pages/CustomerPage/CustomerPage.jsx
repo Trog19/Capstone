@@ -48,10 +48,16 @@ const CustomerPage = (props) => {
 
 function additionalSubmit(event){
     event.preventDefault();
-    let CheckIn={
-        
-    }
+    let checkIn={
+        reservation: reservation_id,
+        arrived: check_in
+    };
+    console.log(checkIn)
+    props.EditReservation(checkIn)
+    return(checkIn)
 }
+
+//Make function that will filter when restaurant is clicked and link restaurant id to menu.restaurnt id and display restaurant drinks.
 
     return(
         <div>
@@ -82,6 +88,15 @@ function additionalSubmit(event){
                     <button type="submit">Submit Order</button>
                 </div>
 
+            </form>
+            <form className="form" onSubmit={additionalSubmit}>
+                <div>
+                    <label>Reservation</label>
+                    <input type='int' value={reservation_id} onChange={(event)=> setReservation_id(event.target.value)}/>
+                    <label>Arrived</label>
+                    <input type='text ' value={check_in} onChange={(event)=> setCheck_in(event.target.value)}/>
+                    <button type="submit">Check In!</button>
+                </div>
             </form>
         </div>
 

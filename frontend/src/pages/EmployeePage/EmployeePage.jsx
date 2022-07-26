@@ -56,6 +56,7 @@ const EmployeePage = (props) => {
             props.EditReservation(reservationStatus)
             return(reservationStatus)
             }
+
         return (
             <div>
   <form className = "form" onSubmit={handleSubmit}>
