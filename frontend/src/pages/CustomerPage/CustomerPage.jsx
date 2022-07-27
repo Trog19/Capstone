@@ -10,23 +10,23 @@ console.log("Hello World")
 const CustomerPage = (props) => {
     const [user, token] = useAuth();
     const[restaurant_id, setRestaurant] = useState("")
-    const[reservationTime, setReservationTime] = useState("")
+    const[time, setTime] = useState("")
     const[party_size, setParty_Size] = useState("")
-    const[userName, setUserName] = useState("")
     const[table_id, setTable_id] = useState("")
     const[drinks, setDrinks]=useState("")
     const[reservation_id, setReservation_id] = useState("")
     const[check_in, setCheck_in] = useState("")
-
+    const[user_name, setUser_name] = useState("")
 
 
     function handleSubmit(event){
         event.preventDefault();
         let newReservation = {
-            userName: userName,
-            party_size: party_size,
-            reservationTime: reservationTime,
-            restaurant: restaurant_id
+            user_name: user_name,
+            party_size: parseInt(party_size),
+            time: parseInt(time),
+            restaurant_id: parseInt(restaurant_id)
+ 
         };
         console.log(newReservation)
         props.PostReservation(newReservation)
@@ -49,6 +49,7 @@ const CustomerPage = (props) => {
 function additionalSubmit(event){
     event.preventDefault();
     let checkIn={
+
         reservation: reservation_id,
         arrived: check_in
     };
@@ -64,12 +65,12 @@ function additionalSubmit(event){
             <div></div>
             <form className="form" onSubmit={handleSubmit}>
                 <div>
-                    <label>UserName</label>
-                    <input type='text' value={userName} onChange={(event)=> setUserName(event.target.value)}/>
+                    <label>User Name</label>
+                    <input type='text' value={user_name} onChange={(event)=> setUser_name(event.target.value)}/>
                     <label>Party Size</label>
                     <input type='int' value={party_size} onChange={(event) => setParty_Size(event.target.value)}/>
                     <label>Reservation Time</label>
-                    <input type='int' value={reservationTime} onChange={(event) => setReservationTime(event.target.value)}/>
+                    <input type='int' value={time} onChange={(event) => setTime(event.target.value)}/>
                     <label>Restaurant</label>
                     <input type='int' value={restaurant_id} onChange={(event) => setRestaurant(event.target.value)}/>
                     <button type="submit">Set Reservation</button>

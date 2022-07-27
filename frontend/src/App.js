@@ -31,7 +31,7 @@ function App() {
   const [reservation, setReservation] = useState([]);
   const [user, token] = useAuth();
   const [drink, setDrink] = useAuth();
-  const [restaurant, setRestaurant] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
   const [reservations, setReservations] = useState ([]);
 
 
@@ -53,6 +53,16 @@ function App() {
   }
 
 
+  const RestaurantSearch = (searchTerm)=>{
+    let results = restaurants.filter((restaurant) => {
+      if(restaurant.name.includes(searchTerm) || restaurant.location.includes(searchTerm) || restaurant.cuisine === (searchTerm)){
+        return true;
+      }
+    }
+    );setRestaurants(results)
+    console.log("Restaurant Search", results.data)
+    return(setRestaurants)
+  }
 
   const PostDrink = async (data) => {
     console.log(data)
@@ -79,7 +89,7 @@ function App() {
       })
       console.log(response.data)
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
     }
     
   }
@@ -121,7 +131,8 @@ const PostOrder = async (data) => {
   return (
     <div>
       <Navbar />
-      <DisplayRestaurants/>
+      <SearchBar RestaurantSearch={RestaurantSearch}/>
+      <DisplayRestaurants />
       <DisplayMenu menu ={menu}/>      
       <DisplayReservations reservations ={reservations}/> 
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>

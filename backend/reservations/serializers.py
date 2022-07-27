@@ -5,9 +5,9 @@ from .models import Reservation
 
 
 class ReservationSerializer(serializers.ModelSerializer):
-    restaurant_id = serializers.IntegerField()
-    table_id =serializers.IntegerField()
+    restaurant_id = serializers.IntegerField(required=False, allow_null=True)
+    table_id =serializers.IntegerField(required=False, allow_null=True)
     class Meta:
         model = Reservation
-        fields = ['id', 'user', 'restaurant_id', 'time', 'party_size', 'check_in', 'table_id', 'accepted', 'last_name']
+        fields = ['id', 'user', 'restaurant_id', 'time', 'party_size', 'check_in', 'table_id', 'accepted', 'user_name']
         depth = 1

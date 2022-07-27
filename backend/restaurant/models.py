@@ -1,3 +1,4 @@
+from tkinter import Menu
 from django.db import models
 from authentication.models import User
 
@@ -11,6 +12,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     cuisine = models.CharField(max_length=50)
+
     
 
 

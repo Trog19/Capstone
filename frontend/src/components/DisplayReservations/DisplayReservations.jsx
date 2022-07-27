@@ -19,13 +19,15 @@ async function AllReservations(){
     AllReservations()
   }, [])
 
+  
     return(
         <div>
+            {false}
             <table>
                 <thead>
                     <tr>
                     <th>Time</th>
-                    <th>Last Name</th>
+                    <th>User Name</th>
                     <th>Party Size</th>
                     <th>Restaurant</th>
                     <th>Table</th>
@@ -38,12 +40,12 @@ async function AllReservations(){
                         return(
                             <tr>
                                 <td>{reservations.time}</td>
-                                <td>{reservations.last_name}</td>
+                                <td>{reservations.user_name}</td>
                                 <td>{reservations.party_size}</td>
                                 <td>{reservations.restaurant_id}</td>
                                 <td>{reservations.table_id}</td>
-                                <td>{reservations.check_in}</td>
-                                <td>{reservations.accepted}</td>
+                                <td>{reservations.check_in.toString()}</td>
+                                <td>{reservations.accepted.toString()}</td>
 
                             </tr>
                         )

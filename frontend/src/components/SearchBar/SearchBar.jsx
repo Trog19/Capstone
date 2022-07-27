@@ -7,7 +7,7 @@ const SearchBar = (props) => {
     function handleSubmit(event){
         event.preventDefault();
        
-        props.songSearch(search)
+        props.RestaurantSearch(search)
         console.log(search)
     }
     return ( 
