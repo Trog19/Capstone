@@ -9,7 +9,6 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import useAuth from "./hooks/useAuth";
 import EmployeePage from "./pages/EmployeePage/EmployeePage";
-import DisplayReservations from "./components/DisplayReservations/DisplayReservations";
 import SearchBar from "./components/SearchBar/SearchBar";
 
 
@@ -17,6 +16,8 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import DisplayRestaurants from "./components/Restaurants/DisplayRestaurants";
+import DisplayReservations from "./components/DisplayReservations/DisplayReservations";
+import DisplayTables from "./components/DisplayTables/DisplayTables";
 
 
 // Util Imports
@@ -33,7 +34,7 @@ function App() {
   const [drink, setDrink] = useAuth();
   const [restaurants, setRestaurants] = useState([]);
   const [reservations, setReservations] = useState ([]);
-
+  const [table, setTable] = useState([]);
 
 
 
@@ -89,7 +90,9 @@ function App() {
       })
       console.log(response.data)
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message
+        
+        )
     }
     
   }
@@ -124,7 +127,19 @@ const PostOrder = async (data) => {
   }
 }
 
-
+// const RestaurantID= async (id)=>{
+//   try{
+//   let response = await axios.get(`http://127.0.0.1:8000/api/restaurant/${id}`, id,{
+//     headers: {
+//       Authorization: "Bearer " + token
+//     }
+//   });
+//   setRestaurants(response.data);
+// }catch(error){
+//   console.log("Restaurant Data", response.data)
+//   console.log("Restaurant ID", response.id)
+// }
+// }
 
  
 
@@ -135,6 +150,7 @@ const PostOrder = async (data) => {
       <DisplayRestaurants />
       <DisplayMenu menu ={menu}/>      
       <DisplayReservations reservations ={reservations}/> 
+      <DisplayTables table={table}/>
       <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
       <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder} EditReservation={EditReservation}/>
       <Routes>

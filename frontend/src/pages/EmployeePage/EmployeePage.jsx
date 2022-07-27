@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import Restaurants from "../../components/Restaurants/DisplayRestaurants";
 
 
 console.log ("Hello world")
