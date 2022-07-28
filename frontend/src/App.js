@@ -18,6 +18,8 @@ import Footer from "./components/Footer/Footer";
 import DisplayRestaurants from "./components/Restaurants/DisplayRestaurants";
 import DisplayReservations from "./components/DisplayReservations/DisplayReservations";
 import DisplayTables from "./components/DisplayTables/DisplayTables";
+import RestaurantMapper from "./components/RestaurantMapper/RestaurantMapper";
+import Tables from "./components/Tables/Tables";
 
 
 // Util Imports
@@ -25,6 +27,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import { useState, useEffect } from "react";
 import CustomerPage from "./pages/CustomerPage/CustomerPage";
 import DisplayMenu from "./components/DisplayMenu/DisplayMenu";
+import RestaurantPage from "./pages/RestaurantPage/RestaurantPage";
 
 
 function App() {
@@ -35,7 +38,7 @@ function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [reservations, setReservations] = useState ([]);
   const [table, setTable] = useState([]);
-
+  const [restaurant, setRestaurant] = useState([]);
 
 
   const PostRestaurant = async (data) => {
@@ -127,6 +130,16 @@ const PostOrder = async (data) => {
   }
 }
 
+async function AllRestaurants(){
+  let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
+  setRestaurants(response.data);
+  console.log("Restaurant Data", response.data)
+}
+
+useEffect(()=>{
+  AllRestaurants()
+   }, [])
+
 // const RestaurantID= async (id)=>{
 //   try{
 //   let response = await axios.get(`http://127.0.0.1:8000/api/restaurant/${id}`, id,{
@@ -146,22 +159,22 @@ const PostOrder = async (data) => {
   return (
     <div>
       <Navbar />
-      <SearchBar RestaurantSearch={RestaurantSearch}/>
-      <DisplayRestaurants />
-      <DisplayMenu menu ={menu}/>      
-      <DisplayReservations reservations ={reservations}/> 
-      <DisplayTables table={table}/>
-      <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
-      <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder} EditReservation={EditReservation}/>
       <Routes>
         <Route
           path="/"
           element={
             <PrivateRoute>
-              <HomePage/>
+                <SearchBar RestaurantSearch={RestaurantSearch}/>
+                <RestaurantMapper restaurants={restaurants} />
+                <DisplayMenu />      
+                <DisplayReservations /> 
+                <RestaurantPage menu ={menu} reservations ={reservations} table={table}/>
+                <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
+                <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder} EditReservation={EditReservation}/>
             </PrivateRoute>
           }
         />
+        <Route path="/restaurantPage/:restaurant_id" element={<RestaurantPage></RestaurantPage>}></Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         </Routes>

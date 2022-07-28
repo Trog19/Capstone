@@ -12,10 +12,17 @@ const DisplayMenu = (props) => {
 
 
 async function AllMenus(){
+
+
     let response = await axios.get("http://127.0.0.1:8000/api/menu/all/");
     setMenu(response.data);
     console.log("Menu Data", response.data)
-      }    
+          
+    
+    // let restaurantMenu = menu.filter(menu => menu.restaurant_id = restaurant.id)
+}
+
+
       useEffect(()=>{
         AllMenus()
       }, [])

@@ -39,7 +39,7 @@ const CustomerPage = (props) => {
         table: table_id,
         reservation: reservation_id,
         drinks: drinks,
-        resttaurant: restaurant_id
+        restaurant: restaurant_id
     };
     console.log(newOrder)
     props.PostOrder(newOrder)

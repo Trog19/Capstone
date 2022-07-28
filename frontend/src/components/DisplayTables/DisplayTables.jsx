@@ -42,7 +42,7 @@ return(
                             <td>{table.id}</td>
                             <td>{table.number}</td>
                             <td>{table.seats}</td>
-                            <td>{table.occupied}</td>
+                            <td>{table.occupied.toString()}</td>
                         </tr>
                     )
                 })}
