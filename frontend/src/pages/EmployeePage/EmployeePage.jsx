@@ -20,6 +20,12 @@ const EmployeePage = (props) => {
         const[restaurant_id, setRestaurant_id] = useState("")
         const[reservation_id, setReservation_id] = useState("")
         const[reservation, setReservation] = useState("")
+        const[user_id, setUser_id] = useState("")
+        const[number, setNumber] = useState("")
+        const[seats, setSeats] = useState("")
+
+
+
 
         const PostRestaurant = async (data) => {
             console.log(data)
@@ -36,36 +42,51 @@ const EmployeePage = (props) => {
             
           }
 
-          const PostDrink = async (data) => {
+        const PostDrink = async (data) => {
+        console.log(data)
+        try {
+            let response = await axios.post("http://127.0.0.1:8000/api/menu/", data, {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+            })
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+        
+        }
+
+        const PostTable = async (data) => {
             console.log(data)
             try {
-              let response = await axios.post("http://127.0.0.1:8000/api/menu/", data, {
+                let response = await axios.post("http://127.0.0.1:8000/api/table/", data, {
                 headers: {
-                  Authorization: "Bearer " + token
+                    Authorization: "Bearer " + token
                 }
-              })
-              console.log(response.data)
+                })
+                console.log(response.data)
             } catch (error) {
-              console.log(error)
+                console.log(error)
             }
             
-          }
+            }
 
           
-  const EditReservation = async (data) => {
-    console.log(data)
-    try {
-      let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
-        headers: {
-          Authorization: "Bearer " + token
+        const EditReservation = async (data) => {
+            console.log(data)
+            try {
+            let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
+                headers: {
+                Authorization: "Bearer " + token
+                }
+            })
+            setReservation(response.data)
+            console.log(response.data)
+            } catch (error) {
+            console.log(error)  
+            }
         }
-      })
-      setReservation(response.data)
-      console.log(response.data)
-    } catch (error) {
-    console.log(error)  
-    }
-  }
 
 
         function handleSubmit(event){
@@ -105,10 +126,28 @@ const EmployeePage = (props) => {
             props.EditReservation(reservationStatus)
             return(reservationStatus)
             }
+
+
+
+        function extraSubmit(event){
+            event.preventDefault();
+            let NewTable={
+                restaurant_id: restaurant_id,
+                user_id: user_id,
+                number: number,
+                seats: seats
+            };
+            props.PostTable(NewTable)
+            return(NewTable)
+        }
+
+
+
             useEffect(() => {
                 PostRestaurant()
                 EditReservation()
                 PostDrink()
+                PostTable()
               }, []);
         return (
             <div>
@@ -138,7 +177,7 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Drink</button>
                 </div>
             </form>
-            <header>ADD TABLE</header>
+            <header>ACCEPT RESERVATION</header>
             <form className="Form" onSubmit={additionalSubmit}>
                 <div>
                     <label>Table</label>
@@ -149,9 +188,22 @@ const EmployeePage = (props) => {
                     <input type='int' value={reservation_id} onChange={(event) => setReservation_id(event.target.value)}/>
                     <button type="submit"> Accept Res.</button>
                 </div>
-
             </form>
-                    </div>
+            <header>ADD TABLE</header>
+            <form className="Form" onSubmit={extraSubmit}>
+                <div>
+                    <label>Restaurant ID</label>
+                    <input type='int' value={restaurant_id} onChange={(event) => setRestaurant_id(event.target.value)}/>
+                    <label>Employee ID</label>
+                    <input type='text' value={user_id} onChange={(event) => setUser_id(event.target.value)}/>
+                    <label>Table Number</label>
+                    <input type='int' value={number} onChange={(event) => setNumber(event.target.value)}/>
+                    <label>Number of Seats</label>
+                    <input type ='int' value={seats} onChange={(event)=> setSeats(event.target.value)}/>
+                    <button type="submit"> Add Table.</button>
+                </div>
+            </form>
+            </div>
           
             
         );

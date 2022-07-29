@@ -27,14 +27,8 @@ import RestaurantPage from "./pages/RestaurantPage/RestaurantPage";
 
 
 function App() {
-  const [menu, setMenu] = useState([]);
-  const [reservation, setReservation] = useState([]);
   const [user, token] = useAuth();
-  const [drink, setDrink] = useAuth();
   const [restaurants, setRestaurants] = useState([]);
-  const [reservations, setReservations] = useState ([]);
-  const [table, setTable] = useState([]);
-  const [restaurant, setRestaurant] = useState([]);
 
 
 
@@ -49,22 +43,16 @@ function App() {
     return(setRestaurants)
   }
 
-  
 
-  
+async function AllRestaurants(){
+  let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
+  setRestaurants(response.data);
+  console.log("Restaurant Data", response.data)
+}
 
-
-
-
-// async function AllRestaurants(){
-//   let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
-//   setRestaurants(response.data);
-//   console.log("Restaurant Data", response.data)
-// }
-
-// useEffect(()=>{
-//   AllRestaurants()
-//    }, [])
+useEffect(()=>{
+  AllRestaurants()
+   }, [])
 
  
 
