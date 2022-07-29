@@ -25,8 +25,9 @@ console.log("params", params)
         let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/")
         setRestaurant(response.data);
         console.log("Restaurant Data", response.data)
-        let restaurantFilter = response.data.filter(restaurant =>restaurant.id == params.restaurant_id)
-        console.log("restaurant filter", restaurantFilter)
+        let results = response.data.filter(restaurant =>restaurant.id == params.restaurant_id)
+        setRestaurant(results)
+        console.log("restaurant filter", results)
     }
 
     async function Menus(){
@@ -71,6 +72,29 @@ console.log("params", params)
   }, []);
   return (
     <div>
+
+<div>
+             <table>
+                 <thead>
+                     <tr>
+                     <th>Name</th>
+                     <th>Location</th>
+                     <th>Cuisine</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     {restaurant.map(restaurant=>{
+                        return(
+                            <tr>
+                                <td >{restaurant.name}</td>
+                                <td>{restaurant.location}</td>
+                                <td>{restaurant.cuisine}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+        </div>
          <div>
             <table>
                 <thead>
