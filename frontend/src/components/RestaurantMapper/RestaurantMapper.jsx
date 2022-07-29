@@ -1,7 +1,5 @@
 import React from "react";
 import Restaurant from "../Restaurant/Restaurant";
-import Tables from "../Tables/Tables";
-
 
 
 const RestaurantMapper = ({restaurants})=>{
