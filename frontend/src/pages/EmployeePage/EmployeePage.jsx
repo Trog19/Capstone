@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+
 
 
 console.log ("Hello world")
@@ -17,7 +19,53 @@ const EmployeePage = (props) => {
         const[description, setDescription] = useState("")
         const[restaurant_id, setRestaurant_id] = useState("")
         const[reservation_id, setReservation_id] = useState("")
+        const[reservation, setReservation] = useState("")
 
+        const PostRestaurant = async (data) => {
+            console.log(data)
+            try {
+              let response = await axios.post("http://127.0.0.1:8000/api/restaurant/", data, {
+                headers: {
+                  Authorization: "Bearer " + token
+                }
+              })
+              console.log(response.data)
+            } catch (error) {
+              console.log(error)
+            }
+            
+          }
+
+          const PostDrink = async (data) => {
+            console.log(data)
+            try {
+              let response = await axios.post("http://127.0.0.1:8000/api/menu/", data, {
+                headers: {
+                  Authorization: "Bearer " + token
+                }
+              })
+              console.log(response.data)
+            } catch (error) {
+              console.log(error)
+            }
+            
+          }
+
+          
+  const EditReservation = async (data) => {
+    console.log(data)
+    try {
+      let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      setReservation(response.data)
+      console.log(response.data)
+    } catch (error) {
+    console.log(error)  
+    }
+  }
 
 
         function handleSubmit(event){
@@ -57,9 +105,14 @@ const EmployeePage = (props) => {
             props.EditReservation(reservationStatus)
             return(reservationStatus)
             }
-
+            useEffect(() => {
+                PostRestaurant()
+                EditReservation()
+                PostDrink()
+              }, []);
         return (
             <div>
+                <header>CREATE RESTAURANT</header>
   <form className = "form" onSubmit={handleSubmit}>
                 <div>
                     <label>Name</label>
@@ -71,6 +124,7 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>
+            <header>ADD DRINKS</header>
             <form className= "form" onSubmit={otherSubmit}>
                 <div>
                     <label>Drink</label>
@@ -84,6 +138,7 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Drink</button>
                 </div>
             </form>
+            <header>ADD TABLE</header>
             <form className="Form" onSubmit={additionalSubmit}>
                 <div>
                     <label>Table</label>
@@ -104,13 +159,6 @@ const EmployeePage = (props) => {
 
 
 export default EmployeePage;
-
-
-
-
-
-
-
 
 
 

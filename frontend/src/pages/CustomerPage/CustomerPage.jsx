@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import Restaurants from "../../components/Restaurants/DisplayRestaurants";
 import axios from "axios";
 
 
@@ -17,6 +16,53 @@ const CustomerPage = (props) => {
     const[reservation_id, setReservation_id] = useState("")
     const[check_in, setCheck_in] = useState("")
     const[user_name, setUser_name] = useState("")
+    const[reservation, setReservation] = useState("")
+
+    const PostReservation = async (data) => {
+        console.log(data)
+        try {
+          let response = await axios.post("http://127.0.0.1:8000/api/reservations/", data, {
+            headers: {
+              Authorization: "Bearer " + token
+            }
+          })
+          console.log(response.data)
+        } catch (error) {
+          console.log(error.message
+            
+            )
+        }
+        
+      }
+
+      const PostOrder = async (data) => {
+        console.log(data)
+        try {
+          let response = await axios.post("http://127.0.0.1:8000/api/order/", data, {
+            headers: {
+              Authorization: "Bearer" + token
+        } 
+          })
+          console.log(response.data)
+        }catch (error) {
+          console.log(error)
+        }
+      }
+
+      const EditReservation = async (data) => {
+        console.log(data)
+        try {
+          let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
+            headers: {
+              Authorization: "Bearer " + token
+            }
+          })
+          setReservation(response.data)
+          console.log(response.data)
+        } catch (error) {
+        console.log(error)  
+        }
+      }
 
 
     function handleSubmit(event){
@@ -58,7 +104,11 @@ function additionalSubmit(event){
     return(checkIn)
 }
 
-//Make function that will filter when restaurant is clicked and link restaurant id to menu.restaurnt id and display restaurant drinks.
+useEffect(() => {
+    PostReservation()
+    PostOrder()
+    EditReservation()
+  }, []);
 
     return(
         <div>

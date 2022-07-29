@@ -15,18 +15,14 @@ import SearchBar from "./components/SearchBar/SearchBar";
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
-import DisplayRestaurants from "./components/Restaurants/DisplayRestaurants";
-import DisplayReservations from "./components/DisplayReservations/DisplayReservations";
-import DisplayTables from "./components/DisplayTables/DisplayTables";
 import RestaurantMapper from "./components/RestaurantMapper/RestaurantMapper";
-import Tables from "./components/Tables/Tables";
+
 
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import { useState, useEffect } from "react";
 import CustomerPage from "./pages/CustomerPage/CustomerPage";
-import DisplayMenu from "./components/DisplayMenu/DisplayMenu";
 import RestaurantPage from "./pages/RestaurantPage/RestaurantPage";
 
 
@@ -41,21 +37,6 @@ function App() {
   const [restaurant, setRestaurant] = useState([]);
 
 
-  const PostRestaurant = async (data) => {
-    console.log(data)
-    try {
-      let response = await axios.post("http://127.0.0.1:8000/api/restaurant/", data, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      })
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-    
-  }
-
 
   const RestaurantSearch = (searchTerm)=>{
     let results = restaurants.filter((restaurant) => {
@@ -68,91 +49,22 @@ function App() {
     return(setRestaurants)
   }
 
-  const PostDrink = async (data) => {
-    console.log(data)
-    try {
-      let response = await axios.post("http://127.0.0.1:8000/api/menu/", data, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      })
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-    
-  }
+  
 
-  const PostReservation = async (data) => {
-    console.log(data)
-    try {
-      let response = await axios.post("http://127.0.0.1:8000/api/reservations/", data, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      })
-      console.log(response.data)
-    } catch (error) {
-      console.log(error.message
-        
-        )
-    }
-    
-  }
-
-  const EditReservation = async (data) => {
-    console.log(data)
-    try {
-      let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      })
-      setReservation(response.data)
-      console.log(response.data)
-    } catch (error) {
-    console.log(error)  
-    }
-  }
+  
 
 
-const PostOrder = async (data) => {
-  console.log(data)
-  try {
-    let response = await axios.post("http://127.0.0.1:8000/api/order/", data, {
-      headers: {
-        Authorization: "Bearer" + token
-  } 
-    })
-    console.log(response.data)
-  }catch (error) {
-    console.log(error)
-  }
-}
 
-async function AllRestaurants(){
-  let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
-  setRestaurants(response.data);
-  console.log("Restaurant Data", response.data)
-}
 
-useEffect(()=>{
-  AllRestaurants()
-   }, [])
-
-// const RestaurantID= async (id)=>{
-//   try{
-//   let response = await axios.get(`http://127.0.0.1:8000/api/restaurant/${id}`, id,{
-//     headers: {
-//       Authorization: "Bearer " + token
-//     }
-//   });
+// async function AllRestaurants(){
+//   let response = await axios.get("http://127.0.0.1:8000/api/restaurant/all/");
 //   setRestaurants(response.data);
-// }catch(error){
 //   console.log("Restaurant Data", response.data)
-//   console.log("Restaurant ID", response.id)
 // }
-// }
+
+// useEffect(()=>{
+//   AllRestaurants()
+//    }, [])
 
  
 
@@ -166,15 +78,12 @@ useEffect(()=>{
             <PrivateRoute>
                 <SearchBar RestaurantSearch={RestaurantSearch}/>
                 <RestaurantMapper restaurants={restaurants} />
-                <DisplayMenu />      
-                <DisplayReservations /> 
-                <RestaurantPage menu ={menu} reservations ={reservations} table={table}/>
-                <EmployeePage PostRestaurant={PostRestaurant} PostDrink={PostDrink} EditReservation={EditReservation}/>
-                <CustomerPage PostReservation={PostReservation} PostOrder={PostOrder} EditReservation={EditReservation}/>
             </PrivateRoute>
           }
         />
+        <Route path="/employeePage/" element={<EmployeePage></EmployeePage>}></Route>
         <Route path="/restaurantPage/:restaurant_id" element={<RestaurantPage></RestaurantPage>}></Route>
+        <Route path="/customerPage" element={<CustomerPage></CustomerPage>}></Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         </Routes>

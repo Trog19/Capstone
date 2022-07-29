@@ -1,0 +1,5 @@
+<RestaurantPage menu ={menu} reservations ={reservations} table={table}/>
+
+PostReservation={PostReservation} PostOrder={PostOrder} EditReservation={EditReservation}
+
+EditReservation={EditReservation}
