@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-
+import { useParams } from "react-router-dom";
 
 
 console.log ("Hello world")
@@ -21,7 +21,7 @@ const EmployeePage = (props) => {
         const[reservation_id, setReservation_id] = useState("")
         const[reservation, setReservation] = useState("")
         const[waitTime, setWaitTime] = useState("")
-
+    
 
 
         const PostRestaurant = async (data) => {
@@ -71,6 +71,19 @@ const EmployeePage = (props) => {
             }
         }
 
+        // const DisplayReservations = async (data) =>{
+        //     console.log(data)
+        //     try {
+        //         let response = await axios.get(`http://127.0.0.1:8000/api/table/${id}`, data,{
+        //             headers: {
+        //                 Authorization: "Bearer " + token
+        //                 }
+        //         })
+        //     } catch (error) {
+        //         console.log (error)
+        //     }
+        // }
+
 
         function handleSubmit(event){
             event.preventDefault();
@@ -110,7 +123,9 @@ const EmployeePage = (props) => {
             return(reservationStatus)
             }
 
-
+// useParams(()=>{
+//     DisplayReservations()
+//      }, [])
         
         return (
             <div>
@@ -152,7 +167,6 @@ const EmployeePage = (props) => {
                     <button type="submit"> Accept Res.</button>
                 </div>
             </form>
-        
             </div>
           
             

@@ -118,8 +118,9 @@ function additionalSubmit(event){
 
     return(
         <div>
-            <div></div>
+            
             <form className="form" onSubmit={handleSubmit}>
+                <div>MAKE RESERVATION!</div>
                 <div>
                     <label>User Name</label>
                     <input type='text' value={user_name} onChange={(event)=> setUser_name(event.target.value)}/>
@@ -133,6 +134,7 @@ function additionalSubmit(event){
                 </div>
             </form>
             <form className="form" onSubmit={otherSubmit}>
+                <div>ORDER DRINKS!</div>
                 <div>
                     <label>Table Number</label>
                     <input type='int' value={table_id} onChange={(event)=> setTable_id(event.target.value)}/>
@@ -147,6 +149,7 @@ function additionalSubmit(event){
 
             </form>
             <form className="form" onSubmit={additionalSubmit}>
+                <div>CHECK IN!</div>
                 <div>
                     <label>Reservation</label>
                     <input type='int' value={reservation_id} onChange={(event)=> setReservation_id(event.target.value)}/>

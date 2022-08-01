@@ -7,6 +7,7 @@ const RestaurantMapper = ({restaurants})=>{
 
         <div>
             {restaurants.map((restaurants)=><li><Restaurant restaurants={restaurants}/></li>)}
+            <li></li>
         </div>
       
 
