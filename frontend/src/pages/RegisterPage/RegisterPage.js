@@ -73,6 +73,8 @@ const RegisterPage = () => {
           value={formData.is_employee}
           onChange={handleInputChange}/>
         </label>
+
+        
         <p style={{ fontSize: "12px" }}>
           NOTE: Make this an uncommon password with characters, numbers, and
           special characters!

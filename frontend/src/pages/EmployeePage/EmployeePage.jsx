@@ -80,7 +80,7 @@ const EmployeePage = (props) => {
                 cusisine: cuisine
             };
             console.log(newRestaurant)
-            props.PostRestaurant(newRestaurant)
+            PostRestaurant(newRestaurant)
             return(newRestaurant)
             
         }
@@ -94,7 +94,7 @@ const EmployeePage = (props) => {
                 restaurant_id: restaurant_id
             };
         console.log(newDrink)
-        props.PostDrink(newDrink)
+        PostDrink(newDrink)
         return(newDrink)
         }
 
@@ -106,16 +106,12 @@ const EmployeePage = (props) => {
                 reservation: reservation_id
             };
             console.log(reservationStatus)
-            props.EditReservation(reservationStatus)
+            EditReservation(reservationStatus)
             return(reservationStatus)
             }
 
 
-            useEffect(() => {
-                PostRestaurant()
-                EditReservation()
-                PostDrink()
-              }, []);
+        
         return (
             <div>
                 <header>CREATE RESTAURANT</header>

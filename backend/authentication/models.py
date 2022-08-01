@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     is_employee = models.BooleanField('employee status', default=False)
-
+    is_customer = models.BooleanField('employee status', default=False)
 
     '''
     This is a custom version of the built in User class

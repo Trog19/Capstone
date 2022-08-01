@@ -17,6 +17,7 @@ const CustomerPage = (props) => {
     const[check_in, setCheck_in] = useState("")
     const[user_name, setUser_name] = useState("")
     const[reservation, setReservation] = useState("")
+    const[user_id, setUser_id] = useState("")
     
 
 
@@ -41,14 +42,14 @@ const CustomerPage = (props) => {
       const PostOrder = async (data) => {
         console.log(data)
         try {
-          let response = await axios.post("http://127.0.0.1:8000/api/order/", data, {
+          let response = await axios.post("http://127.0.0.1:8000/api/orders/", data, {
             headers: {
               Authorization: "Bearer" + token
         } 
           })
           console.log(response.data)
         }catch (error) {
-          console.log(error)
+        console.log(error)
         }
       }
 
@@ -74,24 +75,30 @@ const CustomerPage = (props) => {
             user_name: user_name,
             party_size: parseInt(party_size),
             time: parseInt(time),
-            restaurant_id: parseInt(restaurant_id)
+            restaurant_id: parseInt(restaurant_id),
+            table_id: null,
+            check_in: false,
+            accepted: false,
+            user_id: null
+
  
         };
         console.log(newReservation)
-        props.PostReservation(newReservation)
+       PostReservation(newReservation)
         return(newReservation)
     }
 
     function otherSubmit(event){
     event.preventDefault();
     let newOrder={
-        table: table_id,
-        reservation: reservation_id,
+        table_id: table_id,
+        reservation_id: reservation_id,
         drinks: drinks,
-        restaurant: restaurant_id
+        restaurant_id: restaurant_id,
+        user_id: null
     };
     console.log(newOrder)
-    props.PostOrder(newOrder)
+    PostOrder(newOrder)
     return(newOrder)
 }
 
@@ -103,15 +110,11 @@ function additionalSubmit(event){
         arrived: check_in
     };
     console.log(checkIn)
-    props.EditReservation(checkIn)
+    EditReservation(checkIn)
     return(checkIn)
 }
 
-useEffect(() => {
-    PostReservation()
-    PostOrder()
-    EditReservation()
-  }, []);
+
 
     return(
         <div>

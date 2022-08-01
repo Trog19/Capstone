@@ -41,12 +41,14 @@ const LoginPage = () => {
         </label>
         <label>
           Employee Status
-        </label>
         <input 
         type="text"
         name="is_employee"
         value={formData.is_employee}
         onChange={handleInputChange}/>
+        </label>
+
+        
         {isServerError ? (
           <p className="error">Login failed, incorrect credentials!</p>
         ) : null}
