@@ -10,6 +10,7 @@ const RegisterPage = () => {
     password: "",
     firstName: "",
     lastName: "",
+    is_employee:""
   };
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
@@ -63,6 +64,14 @@ const RegisterPage = () => {
             value={formData.password}
             onChange={handleInputChange}
           />
+          <label>
+          Employee Status:{" "}
+          </label>
+          <input
+          type="text"
+          name="is_employee"
+          value={formData.is_employee}
+          onChange={handleInputChange}/>
         </label>
         <p style={{ fontSize: "12px" }}>
           NOTE: Make this an uncommon password with characters, numbers, and

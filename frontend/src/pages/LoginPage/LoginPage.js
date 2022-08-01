@@ -6,7 +6,7 @@ import "./LoginPage.css";
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
-  const defaultValues = { username: "", password: "" };
+  const defaultValues = { username: "", password: "", is_employee: "" };
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     defaultValues,
     loginUser
@@ -39,6 +39,14 @@ const LoginPage = () => {
             onChange={handleInputChange}
           />
         </label>
+        <label>
+          Employee Status
+        </label>
+        <input 
+        type="text"
+        name="is_employee"
+        value={formData.is_employee}
+        onChange={handleInputChange}/>
         {isServerError ? (
           <p className="error">Login failed, incorrect credentials!</p>
         ) : null}

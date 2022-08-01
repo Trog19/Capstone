@@ -7,7 +7,7 @@ import axios from "axios";
 
 console.log("Hello World")
 const CustomerPage = (props) => {
-    const [user, token] = useAuth();
+    const[user, token] = useAuth();
     const[restaurant_id, setRestaurant] = useState("")
     const[time, setTime] = useState("")
     const[party_size, setParty_Size] = useState("")
@@ -17,6 +17,9 @@ const CustomerPage = (props) => {
     const[check_in, setCheck_in] = useState("")
     const[user_name, setUser_name] = useState("")
     const[reservation, setReservation] = useState("")
+    
+
+
 
     const PostReservation = async (data) => {
         console.log(data)
