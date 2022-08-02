@@ -6,10 +6,11 @@ import React from "react";
 const Restaurant = ({restaurants}) =>{
 
     return(
-        <tr>
-        <td ><a>{restaurants.name}</a></td>
+    <tr>
+        <td>{restaurants.name}</td>
         <td>{restaurants.location}</td>
         <td>{restaurants.cuisine}</td>
+        <td>{restaurants.id}</td>
     </tr>
     );
 }

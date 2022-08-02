@@ -4,8 +4,6 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 
-
-console.log("Hello World")
 const CustomerPage = (props) => {
     const[user, token] = useAuth();
     const[restaurant_id, setRestaurant] = useState("")

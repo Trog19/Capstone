@@ -1,9 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const RestaurantPage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -18,6 +17,7 @@ const [restaurantMenu, setRestaurantMenu] = useState([])
 const [restaurantTable, setRestaurantTable] = useState([])
 const [restaurantReservation, setRestaurantReservation] = useState([])
 const params = useParams()
+const navigate = useNavigate()
 console.log("params", params)
 
 
@@ -59,7 +59,14 @@ console.log("params", params)
             console.log("reservation filter", results)  
           }
   
-
+          const helperFunction=(value )=>{
+            if(value == false){
+                return "Not Occupied"
+            }
+            else{
+                return "Occupied"
+            }
+          }
   
 
   useEffect(() => {
@@ -102,7 +109,6 @@ console.log("params", params)
                     <th>Drink</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Restaurant</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -133,7 +139,7 @@ console.log("params", params)
                         <tr>
                             <td>{restaurantTable.number}</td>
                             <td>{restaurantTable.seats}</td>
-                            <td>{restaurantTable.occupied.toString()}</td>
+                            <td>{helperFunction(restaurantTable.occupied)}</td>
                         </tr>
                     )
                 })}
@@ -163,14 +169,15 @@ console.log("params", params)
                                 <td>{restaurantReservation.table_id}</td>
                                 <td>{restaurantReservation.check_in.toString()}</td>
                                 <td>{restaurantReservation.accepted.toString()}</td>
-
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
         </div>
-
+        <li>
+        <button onClick={()=> navigate("/customerPage")}>Make Reservation!</button>
+        </li>
     </div>
   );
 };

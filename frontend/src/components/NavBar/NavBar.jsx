@@ -11,9 +11,15 @@ const Navbar = () => {
     <div className="navBar">
       <ul>
         <li className="brand">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "rgb(100 55 4)" }}>
             <b>WAIT-LESS</b>
           </Link>
+        </li>
+        <li>
+              <button onClick={()=> navigate("/customerPage")}>Customer Page</button>
+        </li>
+        <li>
+              <button onClick={()=> navigate("/employeePage")}>Employee Page</button>
         </li>
         <li>
           {user ? (
@@ -21,12 +27,6 @@ const Navbar = () => {
           ) : (
             <button onClick={() => navigate("/login")}>Login</button>
           )}
-        </li>
-        <li>
-              <button onClick={()=> navigate("/employeePage")}>Employee Page</button>
-        </li>
-        <li>
-              <button onClick={()=> navigate("/customerPage")}>Customer Page</button>
         </li>
       </ul>
     </div>
