@@ -1,8 +1,9 @@
 
-fontul {
+ul {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
+  align-content: center;
 }
 
 li {
@@ -23,7 +24,7 @@ li {
   border: 2px solid white;
   color: rgb(100, 55, 4);
   padding: 0.4rem 0.5rem;
-  align-content: inherit;
+  align-content: center;
 
 }
 
@@ -37,7 +38,8 @@ li {
   text-align: center;
   cursor: pointer;
   font-size: 3rem;
-  font-size: larger;
+  font-size: 30;
   font: bolder;
   width: fit-content;
+  padding-left: 250px;
 }

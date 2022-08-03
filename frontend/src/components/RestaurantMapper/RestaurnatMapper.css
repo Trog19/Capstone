@@ -1,4 +1,12 @@
 .Mapper{
     text-align: center;
     font-size: large;
+    color: rgb(100, 55, 4);
+    font-size: large;
+    align-content: center;
+    margin-bottom: 100px;
+    width: fit-content;
+    box-sizing: content-box;
+    position: fixed;
+    padding-left: 20%;    
 }

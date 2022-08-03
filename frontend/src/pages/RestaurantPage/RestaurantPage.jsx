@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import "./RestaurantPage.css";
+
 
 const RestaurantPage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -67,6 +69,15 @@ console.log("params", params)
                 return "Occupied"
             }
           }
+
+          const helperFunction2=(value )=>{
+            if(value == false){
+                return "Available"
+            }
+            else{
+                return "Reserved"
+            }
+          }
   
 
   useEffect(() => {
@@ -78,15 +89,16 @@ console.log("params", params)
 
   }, []);
   return (
-    <div>
+    <div className="Button">
 
-<div>
+    <div className>
              <table>
                  <thead>
                      <tr>
                      <th>Name</th>
                      <th>Location</th>
                      <th>Cuisine</th>
+                     <th>Description</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -96,6 +108,7 @@ console.log("params", params)
                                 <td >{restaurant.name}</td>
                                 <td>{restaurant.location}</td>
                                 <td>{restaurant.cuisine}</td>
+                                <td>{restaurant.info}</td>
                             </tr>
                         )
                     })}
@@ -148,8 +161,8 @@ console.log("params", params)
     </div>
     <div>
             {false}
-            <table>
-                <thead>
+            <table className="Reservation">
+                <thead className="th">
                     <tr>
                     <th>Time</th>
                     <th>User Name</th>
@@ -159,7 +172,7 @@ console.log("params", params)
                     <th>Accepted Status</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="td">
                     {restaurantReservation.map(restaurantReservation=>{
                         return(
                             <tr>

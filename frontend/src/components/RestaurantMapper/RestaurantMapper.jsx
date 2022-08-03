@@ -7,20 +7,10 @@ import "./RestaurantMapper"
 
 const RestaurantMapper = ({restaurants})=>{
     return(
-        <div >
-            <div className="Mapper">
-            {restaurants.map(restaurant => <Link to={`/restaurantPage/${restaurant.id}`}>{restaurant.name}</Link>)}
-            </div>        
+        <div>
+            {restaurants.map(restaurant => <Link to={`/restaurantPage/${restaurant.id}`}><div className="Mapper">{restaurant.name}</div></Link>)}
         </div>
       
     );
 }
 export default RestaurantMapper
-
-
-
-
-
-// <div>
-// {restaurants.map((restaurants)=><li><Restaurant restaurants={restaurants}/></li>)}
-// </div>

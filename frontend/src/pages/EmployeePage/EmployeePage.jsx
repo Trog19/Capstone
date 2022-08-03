@@ -22,6 +22,7 @@ const EmployeePage = (props) => {
         const[reservation_id, setReservation_id] = useState("")
         const[reservation, setReservation] = useState("")
         const[waitTime, setWaitTime] = useState("")
+        const[info, setInfo] = useState("")
     
 
 
@@ -60,7 +61,7 @@ const EmployeePage = (props) => {
         const EditReservation = async (data) => {
             console.log(data)
             try {
-            let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
+            let response = await axios.patch("http://127.0.0.1:8000/api/reservations//", data, {
                 headers: {
                 Authorization: "Bearer " + token
                 }
@@ -72,26 +73,14 @@ const EmployeePage = (props) => {
             }
         }
 
-        // const DisplayReservations = async (data) =>{
-        //     console.log(data)
-        //     try {
-        //         let response = await axios.get(`http://127.0.0.1:8000/api/table/${id}`, data,{
-        //             headers: {
-        //                 Authorization: "Bearer " + token
-        //                 }
-        //         })
-        //     } catch (error) {
-        //         console.log (error)
-        //     }
-        // }
-
 
         function handleSubmit(event){
             event.preventDefault();
             let newRestaurant = {
                 name: name,
                 location: location,
-                cusisine: cuisine
+                cuisine: cuisine,
+                info: info
             };
             console.log(newRestaurant)
             PostRestaurant(newRestaurant)
@@ -124,10 +113,7 @@ const EmployeePage = (props) => {
             return(reservationStatus)
             }
 
-// useParams(()=>{
-//     DisplayReservations()
-//      }, [])
-        
+
         return (
             <div>
                 <header>CREATE RESTAURANT</header>
@@ -139,6 +125,8 @@ const EmployeePage = (props) => {
                     <input type='text' value={location} onChange={(event) => setLocation(event.target.value)}/>
                     <label>Cuisine</label>
                     <input type='text' value={cuisine} onChange={(event) => setCuisine(event.target.value)}/>
+                    <label>Restaurant Description</label>
+                    <input type='text' value={info} onChange={(event)=> setInfo(event.target.value)}/>
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>
