@@ -54,7 +54,7 @@ const CustomerPage = (props) => {
       const EditReservation = async (data) => {
         console.log(data)
         try {
-          let response = await axios.patch("http://127.0.0.1:8000/api/reservations/8/", data, {
+          let response = await axios.patch(`http://127.0.0.1:8000/api/reservations/${reservation_id}/`, data, {
             headers: {
               Authorization: "Bearer " + token
             }
