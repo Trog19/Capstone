@@ -159,6 +159,13 @@ const EmployeePage = (props) => {
                     <button type="submit"> Accept Res.</button>
                 </div>
             </form>
+            <div>Walk in Wait Time</div>
+            <form>
+                <div>
+                    <input type={'int'} calue={waitTime} onChange={(event) => setWaitTime(event.target.value)}/>
+                    <button type='submit'>Set Wait Time</button>
+                </div>
+            </form>
             </div>
           
             

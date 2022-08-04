@@ -92,6 +92,7 @@ console.log("params", params)
     <div className="Button">
 
     <div className>
+        <div>Restaurant</div>
              <table>
                  <thead>
                      <tr>
@@ -99,6 +100,7 @@ console.log("params", params)
                      <th>Location</th>
                      <th>Cuisine</th>
                      <th>Description</th>
+                     <th>Walk-in Wait Time</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -109,6 +111,7 @@ console.log("params", params)
                                 <td>{restaurant.location}</td>
                                 <td>{restaurant.cuisine}</td>
                                 <td>{restaurant.info}</td>
+                                <td>{restaurant.wait_time} Minutes</td>
                             </tr>
                         )
                     })}
@@ -116,6 +119,7 @@ console.log("params", params)
             </table>
         </div>
          <div>
+            <div>Drink Menu</div>
             <table>
                 <thead>
                     <tr>
@@ -138,6 +142,7 @@ console.log("params", params)
             </table>
         </div>
         <div>
+        <div>Tables</div>
         <table>
             <thead>
                 <tr>
@@ -160,6 +165,7 @@ console.log("params", params)
         </table>
     </div>
     <div>
+        <div>Reservation List</div>
             {false}
             <table className="Reservation">
                 <thead className="th">
