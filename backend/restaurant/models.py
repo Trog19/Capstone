@@ -13,6 +13,7 @@ class Restaurant(models.Model):
     location = models.CharField(max_length=100)
     cuisine = models.CharField(max_length=50)
     info = models.CharField(max_length=300)
+    image = models.URLField(null=True, blank=True, default=None)
 
     
 

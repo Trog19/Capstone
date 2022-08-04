@@ -23,7 +23,7 @@ const EmployeePage = (props) => {
         const[reservation, setReservation] = useState("")
         const[waitTime, setWaitTime] = useState("")
         const[info, setInfo] = useState("")
-    
+        const[image, setImage] = useState("")
 
 
         const PostRestaurant = async (data) => {
@@ -80,7 +80,8 @@ const EmployeePage = (props) => {
                 name: name,
                 location: location,
                 cuisine: cuisine,
-                info: info
+                info: info,
+                image: image
             };
             console.log(newRestaurant)
             PostRestaurant(newRestaurant)
@@ -127,6 +128,8 @@ const EmployeePage = (props) => {
                     <input type='text' value={cuisine} onChange={(event) => setCuisine(event.target.value)}/>
                     <label>Restaurant Description</label>
                     <input type='text' value={info} onChange={(event)=> setInfo(event.target.value)}/>
+                    <label>Restaurant Image</label>
+                    <input type={'url'} value={image} onChange={(event)=> setImage(event.target.value)}/> 
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>
