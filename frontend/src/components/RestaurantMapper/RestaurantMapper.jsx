@@ -7,11 +7,12 @@ import "./RestaurantMapper"
 
 const RestaurantMapper = ({restaurants})=>{
     return(
-        <div>
+        <div className="Mapper">
             {restaurants.map(restaurant => 
             <>
                 <Link to={`/restaurantPage/${restaurant.id}`}><div className="Mapper">{restaurant.name}</div></Link>
                 <div>{`Restaurant Information: ${restaurant.info}`} </div>
+                <img src={`${restaurant.image}`}/>
             </>
             )}
         </div>

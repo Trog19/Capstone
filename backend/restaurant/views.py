@@ -44,7 +44,7 @@ def restaurant_detail(request, pk):
         restaurant.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     elif request.method == 'PATCH':
-        serializer = RestaurantSerializer(restaurant, data=request.data)
+        serializer = RestaurantSerializer(restaurant, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)

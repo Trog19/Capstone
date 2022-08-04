@@ -21,7 +21,7 @@ const EmployeePage = (props) => {
         const[restaurant_id, setRestaurant_id] = useState("")
         const[reservation_id, setReservation_id] = useState("")
         const[reservation, setReservation] = useState("")
-        const[waitTime, setWaitTime] = useState("")
+        const[wait_time, setWaitTime] = useState("")
         const[info, setInfo] = useState("")
         const[image, setImage] = useState("")
 
@@ -40,6 +40,20 @@ const EmployeePage = (props) => {
             }
             
           }
+
+        const PatchWaitTime = async (data) => {
+            console.log(data)
+            try {
+                let response = await axios.patch(`http://127.0.0.1:8000/api/restaurant/${restaurant_id}`, data,{
+                    headers: {
+                    Authorization: "Bearer " + token
+            }
+            })
+            setWaitTime(response.data)
+        }   catch (error) {
+            console.log(error)
+            }
+        }
 
         const PostDrink = async (data) => {
         console.log(data)
@@ -76,12 +90,15 @@ const EmployeePage = (props) => {
 
         function handleSubmit(event){
             event.preventDefault();
+            let image = document.createElement("INPUT");
+            image.setAttribute("type", "url");
             let newRestaurant = {
                 name: name,
                 location: location,
                 cuisine: cuisine,
                 info: info,
-                image: image
+                image: image,
+                wait_time: wait_time
             };
             console.log(newRestaurant)
             PostRestaurant(newRestaurant)
@@ -114,6 +131,16 @@ const EmployeePage = (props) => {
             return(reservationStatus)
             }
 
+        function extraSubmit(event){
+            event.preventDefault();
+            let updateWait ={
+                restaurant_id: restaurant_id,
+                wait_time: wait_time
+            };
+            console.log(updateWait)
+            PatchWaitTime(updateWait)
+            return(updateWait)
+        }
 
         return (
             <div>
@@ -129,7 +156,7 @@ const EmployeePage = (props) => {
                     <label>Restaurant Description</label>
                     <input type='text' value={info} onChange={(event)=> setInfo(event.target.value)}/>
                     <label>Restaurant Image</label>
-                    <input type={'url'} value={image} onChange={(event)=> setImage(event.target.value)}/> 
+                    <input type='url' value={image} onChange={(event)=> setImage(event.target.value)}/> 
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>
@@ -147,7 +174,7 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Drink</button>
                 </div>
             </form>
-            <form className="Form" onSubmit={additionalSubmit}>
+            <form className="form" onSubmit={additionalSubmit}>
                 <div>ACCEPT RESERVATIONS</div>
                 <div>
                     <label>Table</label>
@@ -159,14 +186,17 @@ const EmployeePage = (props) => {
                     <button type="submit"> Accept Res.</button>
                 </div>
             </form>
+            <form className="form" onSubmit={extraSubmit}>
             <div>Walk in Wait Time</div>
-            <form>
                 <div>
-                    <input type={'int'} calue={waitTime} onChange={(event) => setWaitTime(event.target.value)}/>
+                    <label>Restaurant ID</label>
+                    <input type = 'int' value={restaurant_id} onChange={(event) => setRestaurant_id(event.target.value)}/>
+                    <label>Wait Time</label>
+                    <input type='int' value={wait_time} onChange={(event) => setWaitTime(event.target.value)}/>
                     <button type='submit'>Set Wait Time</button>
                 </div>
             </form>
-            </div>
+        </div>
           
             
         );
