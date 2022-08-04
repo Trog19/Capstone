@@ -61,7 +61,7 @@ const EmployeePage = (props) => {
         const EditReservation = async (data) => {
             console.log(data)
             try {
-            let response = await axios.patch("http://127.0.0.1:8000/api/reservations//", data, {
+            let response = await axios.patch(`http://127.0.0.1:8000/api/reservations/${reservation_id}/`, data, {
                 headers: {
                 Authorization: "Bearer " + token
                 }
@@ -116,8 +116,8 @@ const EmployeePage = (props) => {
 
         return (
             <div>
-                <header>CREATE RESTAURANT</header>
   <form className = "form" onSubmit={handleSubmit}>
+    <div>CREATE YOUR RESTAURANT!</div>
                 <div>
                     <label>Name</label>
                     <input type='text' value={name} onChange={(event) => setName(event.target.value)}/>
@@ -130,8 +130,8 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>
-            <header>ADD DRINKS</header>
             <form className= "form" onSubmit={otherSubmit}>
+                <div>ADD DRINKS!</div>
                 <div>
                     <label>Drink</label>
                     <input type='text' value={drink} onChange={(event)=> setDrink(event.target.value)}/>
@@ -144,8 +144,8 @@ const EmployeePage = (props) => {
                     <button type="submit">Add Drink</button>
                 </div>
             </form>
-            <header>ACCEPT RESERVATION</header>
             <form className="Form" onSubmit={additionalSubmit}>
+                <div>ACCEPT RESERVATIONS</div>
                 <div>
                     <label>Table</label>
                     <input type='int' value={table_id} onChange={(event) => setTable_id(event.target.value)}/>
