@@ -107,6 +107,7 @@ console.log("params", params)
                      {restaurant.map(restaurant=>{
                         return(
                             <tr>
+                                {/* <img src={`http://127.0.0.1:8000/${restaurant.image}`}/> */}
                                 <td >{restaurant.name}</td>
                                 <td>{restaurant.location}</td>
                                 <td>{restaurant.cuisine}</td>

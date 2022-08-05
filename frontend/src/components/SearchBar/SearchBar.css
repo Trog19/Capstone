@@ -1,0 +1,13 @@
+.Bar{
+    background-color: transparent;
+    color: rgb(100, 55, 4);
+    font-size: large;
+    align-content: center;
+    margin-bottom: 1px;
+    text-align: center;
+    width: fit-content;
+    box-sizing: content-box;
+    position: relative;
+    padding-left: 40%;    
+    padding-bottom: 5%;
+}

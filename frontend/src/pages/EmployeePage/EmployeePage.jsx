@@ -28,10 +28,28 @@ const EmployeePage = (props) => {
 
         const PostRestaurant = async (data) => {
             console.log(data)
+            let formData = new FormData()
+            // let newRestaurant = {
+            //     name: name,
+            //     location: location,
+            //     cuisine: cuisine,
+            //     info: info,
+            //     image: image,
+            //     wait_time: wait_time
+            // };
+            if(data.image){
+                formData.append('image', data.image)
+            }
+            formData.append('name', data.name)
+            formData.append('location', data.location) 
+            formData.append('cuisine', data.cuisine)
+            formData.append('info', data.info)
+            formData.append('wait_time', data.wait_time)
             try {
-              let response = await axios.post("http://127.0.0.1:8000/api/restaurant/", data, {
+              let response = await axios.post("http://127.0.0.1:8000/api/restaurant/", formData, {
                 headers: {
-                  Authorization: "Bearer " + token
+                  Authorization: "Bearer " + token,
+                  "Content-Type" : "multipart/form-data"
                 }
               })
               console.log(response.data)
@@ -90,15 +108,13 @@ const EmployeePage = (props) => {
 
         function handleSubmit(event){
             event.preventDefault();
-            let image = document.createElement("INPUT");
-            image.setAttribute("type", "url");
             let newRestaurant = {
                 name: name,
                 location: location,
                 cuisine: cuisine,
                 info: info,
                 image: image,
-                wait_time: wait_time
+                wait_time: 0
             };
             console.log(newRestaurant)
             PostRestaurant(newRestaurant)
@@ -156,7 +172,7 @@ const EmployeePage = (props) => {
                     <label>Restaurant Description</label>
                     <input type='text' value={info} onChange={(event)=> setInfo(event.target.value)}/>
                     <label>Restaurant Image</label>
-                    <input type='url' value={image} onChange={(event)=> setImage(event.target.value)}/> 
+                    <input type='file'  onChange={(event)=> setImage(event.target.files[0])}/> 
                     <button type="submit">Add Restaurant</button>
                 </div>
             </form>

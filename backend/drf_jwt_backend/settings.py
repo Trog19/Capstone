@@ -1,3 +1,5 @@
+
+
 """
 Django settings for drf_jwt_backend project.
 
@@ -9,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -103,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'mediafiles')
+
+MEDIA_URL= '/media/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -163,6 +168,5 @@ try:
     from drf_jwt_backend.local_settings import *
 except ImportError:
     pass
-
 
 

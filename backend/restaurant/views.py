@@ -1,10 +1,11 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes
 from .models import Restaurant
 from .serializers import RestaurantSerializer
 from django.shortcuts import get_object_or_404
+from rest_framework.parsers import MultiPartParser, FormParser
 # Create your views here.
 
 
@@ -18,6 +19,7 @@ def get_restaurant(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def make_restaurant(request):
     if request.method == 'POST':
         serializer = RestaurantSerializer(data=request.data)
