@@ -50,3 +50,5 @@ def restaurant_detail(request, pk):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    else:
+        pass

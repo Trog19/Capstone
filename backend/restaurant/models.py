@@ -20,7 +20,6 @@ class Restaurant(models.Model):
 
 
 
-    
 
 
  
