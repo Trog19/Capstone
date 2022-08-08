@@ -90,10 +90,9 @@ console.log("params", params)
   }, []);
   return (
     <div className="Button">
-
-    <div className>
+    <div className="scrollbar">
         <div>Restaurant</div>
-             <table>
+             <table className="table">
                  <thead>
                      <tr>
                      <th>Name</th>
@@ -120,6 +119,7 @@ console.log("params", params)
             </table>
         </div>
          <div>
+            <div className="Names">Below is the drink menu, table chart, and reservation list! If your party matches with an available time please place your reservation and order by clicking the "Make Reservation" button at the bottom.</div>
             <div>Drink Menu</div>
             <table>
                 <thead>
@@ -188,7 +188,7 @@ console.log("params", params)
                                 <td>{restaurantReservation.party_size}</td>
                                 <td>{restaurantReservation.table_id}</td>
                                 <td>{restaurantReservation.check_in.toString()}</td>
-                                <td>{restaurantReservation.accepted.toString()}</td>
+                                <td>{helperFunction2(restaurantReservation.accepted)}</td>
                             </tr>
                         )
                     })}

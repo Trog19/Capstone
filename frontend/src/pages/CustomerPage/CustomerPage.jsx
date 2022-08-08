@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import "./CustomerPage.css"
 
 
 const CustomerPage = (props) => {
@@ -115,7 +116,7 @@ function additionalSubmit(event){
 
 
     return(
-        <div>
+        <div className="scrollbar">
             
             <form className="form" onSubmit={handleSubmit}>
                 <div>MAKE RESERVATION!</div>

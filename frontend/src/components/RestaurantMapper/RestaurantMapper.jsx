@@ -7,13 +7,13 @@ import "./RestaurantMapper.css"
 
 const RestaurantMapper = ({restaurants})=>{
     return(
-        <div className="Mapper">
-            <div>Welcome to Wait-Less! The new way of finding where and when to eat.</div>
+        <div className="scrollbar">
+            <p>Welcome to Wait-Less! The new way of finding where and when to eat. Please pick from an option below or look for something new with the search bar!</p>
             {restaurants.map(restaurant => 
             <>
+                <Link to={`/restaurantPage/${restaurant.id}`}><div>{restaurant.name}</div></Link>
+                <div >{`Restaurant Information: ${restaurant.info}`} </div>
                 <img src={`http://127.0.0.1:8000${restaurant.image}`}/>
-                <Link className="Mapper" to={`/restaurantPage/${restaurant.id}`}><div className="Mapper">{restaurant.name}</div></Link>
-                <div className="Mapper">{`Restaurant Information: ${restaurant.info}`} </div>
                 <img/>
             </>
             )}

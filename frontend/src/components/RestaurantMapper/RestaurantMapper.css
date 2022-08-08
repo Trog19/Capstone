@@ -6,7 +6,36 @@
     align-content: center;
     margin-bottom: 100px;
     width: fit-content;
-    box-sizing: content-box;
-    position: fixed;
-    padding-left: 20%;    
+    margin: 2%;
+    width: 80%;
+}
+
+img{
+    height: 200px;
+    max-width: 100%;
+}
+
+p{
+    color: rgb(100, 55, 4);
+    font-size: xx-large;
+    text-align: center;
+    padding-bottom: 5%;
+    margin: 0;
+}
+
+.container{
+    width: 500px
+}
+
+
+.scrollbar{
+    overflow-y: scroll; 
+    overflow-x: hidden; 
+    scroll-behavior: auto;
+    text-align: center;
+    font-size: large;
+    color: rgb(100, 55, 4);
+    width: 100%;
+    margin: 2%;
+    margin-bottom: 5%;
 }
