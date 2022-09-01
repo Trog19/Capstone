@@ -3,9 +3,13 @@ import RestaurantPage from "../../pages/RestaurantPage/RestaurantPage";
 import Restaurant from "../Restaurant/Restaurant";
 import { Link } from "react-router-dom";
 import "./RestaurantMapper.css"
+import useAuth from "../../hooks/useAuth";
 
 
 const RestaurantMapper = ({restaurants})=>{
+    const [user, token] = useAuth();
+    console.log('user', user)
+
     return(
         <div className="scrollbar">
             <p>Welcome to Wait-Less! The new way of finding where and when to eat. Please pick from an option below or look for something new with the search bar!</p>

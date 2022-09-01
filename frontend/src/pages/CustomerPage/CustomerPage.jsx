@@ -60,12 +60,15 @@ const CustomerPage = (props) => {
               Authorization: "Bearer " + token
             }
           })
-          setReservation(response.data)
+          if (checkbox.is(checked))
+          setReservation(true)
           console.log(response.data)
         } catch (error) {
         console.log(error)  
         }
       }
+
+
 
 
     function handleSubmit(event){
@@ -101,17 +104,20 @@ const CustomerPage = (props) => {
     return(newOrder)
 }
 
-function additionalSubmit(event){
-    event.preventDefault();
-    let checkIn={
-
-        reservation: reservation_id,
-        arrived: check_in
-    };
-    console.log(checkIn)
-    EditReservation(checkIn)
-    return(checkIn)
-}
+// function additionalSubmit(event){
+//     event.preventDefault();
+//     let checkIn={
+//       check_in: check_in,
+//       reservation_id: reservation_id
+//     };
+//     if ('checkbox'.is(':checked')){
+//       EditReservation === true
+//     }
+    
+    // console.log(checkIn)
+    // EditReservation(checkIn)
+    // return(checkIn)
+// }
 
 
 
@@ -148,13 +154,8 @@ function additionalSubmit(event){
 
             </form>
             <form className="form" onSubmit={additionalSubmit}>
-                <div>CHECK IN!</div>
-                <div>
-                    <label>Reservation</label>
-                    <input type='int' value={reservation_id} onChange={(event)=> setReservation_id(event.target.value)}/>
-                    <label>Arrived</label>
-                    <input type='text ' value={check_in} onChange={(event)=> setCheck_in(event.target.value)}/>
-                    <button type="submit">Check In!</button>
+                <div>CHECK IN!
+                    <input type='checkbox' value={check_in} onChange={(event)=> setCheck_in(event.target.value)}/>
                 </div>
             </form>
         </div>

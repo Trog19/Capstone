@@ -29,14 +29,6 @@ const EmployeePage = (props) => {
         const PostRestaurant = async (data) => {
             console.log(data)
             let formData = new FormData()
-            // let newRestaurant = {
-            //     name: name,
-            //     location: location,
-            //     cuisine: cuisine,
-            //     info: info,
-            //     image: image,
-            //     wait_time: wait_time
-            // };
             if(data.image){
                 formData.append('image', data.image)
             }
@@ -71,6 +63,21 @@ const EmployeePage = (props) => {
         }   catch (error) {
             console.log(error)
             }
+        } 
+        
+        const EditReservation = async (data) => {
+            console.log('edit data', data)
+            try {
+            let response = await axios.patch(`http://127.0.0.1:8000/api/reservations/${reservation_id}/`, data, {
+                headers: {
+                Authorization: "Bearer " + token
+                }
+            })
+            setReservation(response.data)
+            console.log(response.data)
+            } catch (error) {
+            console.log(error)  
+            }
         }
 
         const PostDrink = async (data) => {
@@ -90,20 +97,7 @@ const EmployeePage = (props) => {
 
 
           
-        const EditReservation = async (data) => {
-            console.log(data)
-            try {
-            let response = await axios.patch(`http://127.0.0.1:8000/api/reservations/${reservation_id}/`, data, {
-                headers: {
-                Authorization: "Bearer " + token
-                }
-            })
-            setReservation(response.data)
-            console.log(response.data)
-            } catch (error) {
-            console.log(error)  
-            }
-        }
+       
 
 
         function handleSubmit(event){
@@ -138,9 +132,9 @@ const EmployeePage = (props) => {
         function additionalSubmit(event){
             event.preventDefault();
             let reservationStatus ={
-                table: table_id,
-                accept: accepted,
-                reservation: reservation_id
+                table_id: table_id,
+                accepted: accepted,
+                reservation_id: reservation_id
             };
             console.log(reservationStatus)
             EditReservation(reservationStatus)
@@ -196,7 +190,7 @@ const EmployeePage = (props) => {
                     <label>Table</label>
                     <input type='int' value={table_id} onChange={(event) => setTable_id(event.target.value)}/>
                     <label>Status</label>
-                    <input type='text' value={accepted} onChange={(event) => setAccepted(event.target.value)}/>
+                    <input type='text' name='accepted' value={accepted} onChange={(event) => setAccepted(event.target.value)}/>
                     <label>Reservation Num.</label>
                     <input type='int' value={reservation_id} onChange={(event) => setReservation_id(event.target.value)}/>
                     <button type="submit"> Accept Res.</button>
